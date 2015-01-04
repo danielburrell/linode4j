@@ -12,7 +12,6 @@ import java.util.List;
 public class TestApplication {
     @Test
     public void test() throws IOException {
-
         }
 
 }
