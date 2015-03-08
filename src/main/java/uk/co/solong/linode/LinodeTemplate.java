@@ -26,23 +26,23 @@ public class LinodeTemplate {
     public LinodeTemplate(String api) {
         linode = new Linode(api);
     }
-
+/*
     public CreateDiskResponse createDisk(int linodeId) throws IOException {
         LinodeResponse r = linode.execute(API_ACTION.LINODE_DISK_CREATE, "LinodeID", Integer.toString(linodeId));
-        return getCreateDiskResponse(r);
+        return getCreateDiskResponse(r,linodeId);
     }
 
     public CreateDiskResponse createDisk(int linodeId, int fromDistributionId, String rootPass, String rootSSHKey) throws IOException {
         LinodeResponse r = linode.execute(API_ACTION.LINODE_DISK_CREATE, "LinodeID", Integer.toString(linodeId), "FromDistributionID",Integer.toString(fromDistributionId), "rootPass", rootPass, "rootSSHKey", rootSSHKey);
-        return getCreateDiskResponse(r);
+        return getCreateDiskResponse(r,linodeId);
     }
 
-    public CreateDiskResponse createDiskFromStackScript(int linodeId, int stackScriptId, JsonNode stackScriptUDFResponses, int distributionId, String label, int size, String rootPass, String rootSSHKey) throws IOException {
-        LinodeResponse r = linode.execute(API_ACTION.LINODE_DISK_CREATEFROMDSTACKSCRIPT, "LinodeID", Integer.toString(linodeId), "StackScriptID", Integer.toString(stackScriptId), "StackScriptUDFResponses", stackScriptUDFResponses.asText(), "DistributionID", Integer.toString(distributionId), "Label", label, "Size", Integer.toString(size), "rootPass", rootPass, "rootSSHKey", rootSSHKey);
-        return getCreateDiskResponse(r);
+    public CreateDiskResponse createDiskFromStackScript(int linodeId, int stackScriptId, JsonNode stackScriptUDFResponses, int distributionId, String diskLabel, int diskSize, String rootPass, String rootSSHKey) throws IOException {
+        LinodeResponse r = linode.execute(API_ACTION.LINODE_DISK_CREATEFROMDSTACKSCRIPT, "LinodeID", Integer.toString(linodeId), "StackScriptID", Integer.toString(stackScriptId), "StackScriptUDFResponses", stackScriptUDFResponses.asText(), "DistributionID", Integer.toString(distributionId), "Label", diskLabel, "Size", Integer.toString(diskSize), "rootPass", rootPass, "rootSSHKey", rootSSHKey);
+        return getCreateDiskResponse(r,linodeId);
     }
 
-    private CreateDiskResponse getCreateDiskResponse(LinodeResponse r) throws JsonProcessingException {
+    private CreateDiskResponse getCreateDiskResponse(LinodeResponse r, int linodeId) throws JsonProcessingException {
         ObjectMapper m = new ObjectMapper();
         logger.debug("Response: {}",m.writeValueAsString(r));
         JsonNode resultJobId = r.getData().get("JobID");
@@ -53,9 +53,10 @@ public class LinodeTemplate {
             CreateDiskResponse res = new CreateDiskResponse();
             res.setDiskId(resultDiskId.asLong());
             res.setJobId(resultJobId.asInt());
+            res.setLinodeId(linodeId);
             return res;
         }
-    }
+    }*/
 
     public int createStackScript(String label, String description, List<Integer> distributionIdList, boolean isPublic, String revisionNote, String script) throws IOException {
         String isPublicNumeric = isPublic ? "1" : "0";
@@ -69,6 +70,7 @@ public class LinodeTemplate {
             return resultLinodeId.asInt();
         }
     }
+    
     public List<Distribution> getAvailableDistributions() throws IOException {
         LinodeResponse r = linode.availableLinodePlans();
         DataToListMapper<Distribution> dataToListMapper= new DataToListMapper<Distribution>();
@@ -86,8 +88,8 @@ public class LinodeTemplate {
             return resultLinodeId.asInt();
         }
     }
-    public int createLinode(int datacenterId, int planId, int paymentTerm) throws IOException {
-        LinodeResponse r = linode.execute(API_ACTION.LINODE_CREATE,"DataCenterID",Integer.toString(datacenterId),"PlanID",Integer.toString(planId),"PaymentTerm",Integer.toString(paymentTerm));
+    public int createLinode(int datacenterId, int planId, PaymentTerm paymentTerm) throws IOException {
+        LinodeResponse r = linode.execute(API_ACTION.LINODE_CREATE,"DataCenterID",Integer.toString(datacenterId),"PlanID",Integer.toString(planId),"PaymentTerm",Integer.toString(paymentTerm.getPaymentTerm()));
         ObjectMapper m = new ObjectMapper();
         logger.debug("Response: {}",m.writeValueAsString(r));
         JsonNode linodeId = r.getData().get("LinodeID");

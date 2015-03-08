@@ -13,15 +13,14 @@ import java.util.concurrent.TimeoutException;
 /**
  * Created by terabyte on 26/12/2014.
  */
-public class AsyncLinodeTask<T extends CreateDiskResponse, R> implements Future<R> {
+public class AsyncLinodeTask<T extends JobListable<?>> implements Future<StateAndResponse> {
     private final T data;
-    private final String apiKey;
-    private final Linode linode;
+    //private final Linode linode;
+    private JobRegistry jobRegistry;
     private boolean done = false;
-    AsyncLinodeTask(String apiKey, T data){
+    AsyncLinodeTask(JobRegistry jobRegistry, T data){
+        this.jobRegistry = jobRegistry;
         this.data = data;
-        this.apiKey = apiKey;
-        linode = new Linode(apiKey);
     }
 
     @Override
@@ -40,25 +39,20 @@ public class AsyncLinodeTask<T extends CreateDiskResponse, R> implements Future<
     }
 
     @Override
-    public R get() throws InterruptedException, ExecutionException {
-        //refactor this crap code as "while job i'm looking for in map not in completed or failed state, block if not available with notify all to wake to check.
-        //while the map object is wrapped by a class which populates the map and actually performs a single list job based call.
-        try {
-            while (!done) {
-                LinodeResponse r = linode.execute(API_ACTION.LINODE_JOB_LIST, Long.toString(data.getDiskId()), Integer.toString(data.getJobId()));
-                if (r.getData().get("HOST_SUCCESS").asBoolean(false)) {
-                    return true;
-                }
-                Thread.sleep(10000L);
-            }
-
-        } catch (IOException e) {
-            throw new ExecutionException(e);
+    public StateAndResponse get() throws InterruptedException {
+        Job j = new Job();
+        j.setJobId(data.getJobId());
+        j.setLinodeId(data.getLinodeId());
+        while (State.RUNNING.equals(jobRegistry.getJobState(j).getState())) {
+            wait();
         }
+        return jobRegistry.getJobState(j);
     }
 
     @Override
-    public R get(long timeout, TimeUnit unit) throws InterruptedException, ExecutionException, TimeoutException {
-        return null;
+    public StateAndResponse get(long timeout, TimeUnit unit) throws InterruptedException, ExecutionException, TimeoutException {
+        throw new RuntimeException("not implemented yet");
     }
+
+   
 }

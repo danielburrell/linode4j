@@ -1,5 +1,7 @@
 package uk.co.solong.linode;
 
+import java.util.Map;
+
 import com.notedpath.linode.Linode;
 
 /**
@@ -7,10 +9,11 @@ import com.notedpath.linode.Linode;
  */
 public class JobListDao {
     private Linode linode;
-
+/*
     private Map<Integer, LinodeJob> jobs;
-
+*/
     public State getState(int jobId) {
+        return null;
         //return true if the given job is in a success state, fail state, running, unknown (not found)
         //return jobs.
     }

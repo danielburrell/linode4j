@@ -185,7 +185,7 @@ public class Linode {
 	 * @throws java.io.IOException
 	 * @throws HttpException
 	 */
-	public Object batchExecute(List<LinodeRequest> requests) throws IOException, HttpException {
+	public List<LinodeResponse> batchExecute(List<LinodeRequest> requests) throws IOException, HttpException {
 		StringBuilder b = generateURL("batch");
 		ObjectMapper m = new ObjectMapper();
 
