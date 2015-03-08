@@ -88,7 +88,7 @@
                     <execution>
                         <configuration>
                             <schemaFile>${basedir}/src/main/resources/schema.json</schemaFile>
-                            <outputDirectory>${project.build.directory}/target/generated-sources</outputDirectory>
+                            <outputDirectory>${project.build.directory}/generated-sources</outputDirectory>
                         </configuration>
                         <goals>
                             <goal>rest2java</goal>
