@@ -86,32 +86,16 @@
                 <version>0.0.1-SNAPSHOT</version>
                 <executions>
                     <execution>
+                        <id>rest2java</id>
+                        <phase>generate-sources</phase>
                         <configuration>
-                            <schemaFile>${basedir}/src/main/resources/schema.json</schemaFile>
-                            <outputDirectory>${project.build.directory}/generated-sources</outputDirectory>
+                            <!-- <schemaFile>${basedir}/src/main/resources/schema.json</schemaFile> <outputDirectory>${project.build.directory}/generated-sources</outputDirectory> -->
+                            <outputDirectory>${project.build.directory}/java-gen</outputDirectory>
+                            <targetPackage>uk.co.solong.linode4j</targetPackage>
                         </configuration>
                         <goals>
                             <goal>rest2java</goal>
                         </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>build-helper-maven-plugin</artifactId>
-                <version>1.9.1</version>
-                <executions>
-                    <execution>
-                        <id>add-source</id>
-                        <phase>process-sources</phase>
-                        <goals>
-                            <goal>add-source</goal>
-                        </goals>
-                        <configuration>
-                            <sources>
-                                <source>${project.build.directory}/generated-sources</source>
-                            </sources>
-                        </configuration>
                     </execution>
                 </executions>
             </plugin>
@@ -151,35 +135,6 @@
                 <version>3.2</version>
             </plugin>
         </plugins>
-        <pluginManagement>
-            <plugins>
-            <!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
-                <plugin>
-                <groupId>org.eclipse.m2e</groupId>
-                <artifactId>lifecycle-mapping</artifactId>
-                <version>1.0.0</version>
-                <configuration>
-                    <lifecycleMappingMetadata>
-                        <pluginExecutions>
-                            <pluginExecution>
-                                <pluginExecutionFilter>
-                                    <groupId>org.codehaus.mojo</groupId>
-                                    <artifactId>build-helper-maven-plugin</artifactId>
-                                    <versionRange>[1.9.1,)</versionRange>
-                                    <goals>
-                                        <goal>add-source</goal>
-                                    </goals>
-                                </pluginExecutionFilter>
-                                <action>
-                                    <ignore></ignore>
-                                </action>
-                            </pluginExecution>
-                        </pluginExecutions>
-                    </lifecycleMappingMetadata>
-                </configuration>
-                </plugin>
-            </plugins>
-        </pluginManagement>
     </build>
     <dependencies>
         <dependency>
