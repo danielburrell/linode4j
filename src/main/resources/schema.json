@@ -33,7 +33,8 @@
                "jsonValue":"linode.boot"
             }
          ],
-         "url":""
+         "url":"",
+         "returnType":{"$schema":"http://json-schema.org/draft-04/schema#","id":"http://solong.co.uk/jsonschemas","type":"object","properties":{"ERRORARRAY":{"id":"http://solong.co.uk/jsonschemas/ERRORARRAY","type":"array","items":{"id":"http://solong.co.uk/jsonschemas/ERRORARRAY/0","type":"object","properties":{"ERRORCODE":{"id":"http://solong.co.uk/jsonschemas/ERRORARRAY/0/ERRORCODE","type":"integer"},"ERRORMESSAGE":{"id":"http://solong.co.uk/jsonschemas/ERRORARRAY/0/ERRORMESSAGE","type":"string"}},"required":["ERRORCODE","ERRORMESSAGE"]},"required":["0"]},"DATA":{"id":"http://solong.co.uk/jsonschemas/DATA","type":"object","properties":{}},"ACTION":{"id":"http://solong.co.uk/jsonschemas/ACTION","type":"string"}},"required":["ERRORARRAY","DATA","ACTION"]}
       }
    ]
 }
