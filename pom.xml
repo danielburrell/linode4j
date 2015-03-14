@@ -5,6 +5,9 @@
     <artifactId>linode4j</artifactId>
     <version>1.0-SNAPSHOT</version>
     <name>Linode4j</name>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
     <licenses>
         <license>
             <name>MIT License</name>
@@ -167,11 +170,6 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
             <version>4.0.0.RELEASE</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>3.3.1</version>
         </dependency>
     </dependencies>
     <scm>
