@@ -17,14 +17,15 @@
             {  
                "type":"java.lang.Integer",
                "javaName":"linodeId",
-               "jsonName":"linodeID"
+               "jsonName":"LinodeID"
             }
          ],
          "optionalParameters":[  
             {  
                "type":"java.lang.Integer",
                "javaName":"configId",
-               "jsonName":"configID"
+               "jsonName":"ConfigID",
+               "description":"The ConfigID to boot, available from linode.config.list()."
             }
          ],
          "fixedParameters":[
@@ -34,7 +35,366 @@
             }
          ],
          "url":"",
-         "returnType":{"$schema":"http://json-schema.org/draft-04/schema#","id":"http://solong.co.uk/jsonschemas","type":"object","properties":{"ERRORARRAY":{"id":"http://solong.co.uk/jsonschemas/ERRORARRAY","type":"array","items":{"id":"http://solong.co.uk/jsonschemas/ERRORARRAY/0","type":"object","properties":{"ERRORCODE":{"id":"http://solong.co.uk/jsonschemas/ERRORARRAY/0/ERRORCODE","type":"integer"},"ERRORMESSAGE":{"id":"http://solong.co.uk/jsonschemas/ERRORARRAY/0/ERRORMESSAGE","type":"string"}},"required":["ERRORCODE","ERRORMESSAGE"]},"required":["0"]},"DATA":{"id":"http://solong.co.uk/jsonschemas/DATA","type":"object","properties":{}},"ACTION":{"id":"http://solong.co.uk/jsonschemas/ACTION","type":"string"}},"required":["ERRORARRAY","DATA","ACTION"]}
+         "description":"Issues a boot job for the provided ConfigID. If no ConfigID is provided boots the last used configuration profile, or the first configuration profile if this Linode has never been booted."
+      },
+      {  
+         "methodName":"testEcho",
+         "mandatoryParameters":[  
+            {  
+               "type":"java.lang.String",
+               "javaName":"mandatoryValueToEcho",
+               "jsonName":"mandatoryValueToEcho"
+            }
+         ],
+         "optionalParameters":[  
+            {  
+               "type":"java.lang.String",
+               "javaName":"optionalValueToEcho",
+               "jsonName":"optionalValueToEcho"
+            }
+         ],
+         "fixedParameters":[
+            {
+               "jsonName":"api_action",
+               "jsonValue":"test.echo"
+            }
+         ],
+         "url":""
+      },
+      {  
+         "methodName":"cloneLinode",
+         "mandatoryParameters":[  
+            {  
+               "type":"java.lang.Integer",
+               "javaName":"linodeId",
+               "jsonName":"LinodeID",
+               "description":"The LinodeID that you want cloned"
+            },
+            {  
+               "type":"java.lang.Integer",
+               "javaName":"datacenterId",
+               "jsonName":"DatacenterID",
+               "description":"The DatacenterID from avail.datacenters() where you wish to place this new Linode"
+            },
+            {  
+               "type":"java.lang.Integer",
+               "javaName":"planId",
+               "jsonName":"PlanID",
+               "description":"The desired PlanID available from avail.LinodePlans()"
+            }
+         ],
+         "optionalParameters":[  
+            {  
+               "type":"java.lang.Integer",
+               "javaName":"paymentTerm",
+               "jsonName":"PaymentTerm",
+               "description":"Subscription term in months for prepaid customers. One of: 1, 12, or 24"
+            }
+         ],
+         "fixedParameters":[
+            {
+               "jsonName":"api_action",
+               "jsonValue":"linode.clone"
+            }
+         ],
+         "url":"",
+         "description":"Creates a new Linode, assigns you full privileges, and then clones the specified LinodeID to the new Linode. There is a limit of 5 active clone operations per source Linode. It is recommended that the source Linode be powered down during the clone."
+      },
+      {  
+         "methodName":"createLinode",
+         "mandatoryParameters":[ 
+            {  
+               "type":"java.lang.Integer",
+               "javaName":"datacenterId",
+               "jsonName":"DatacenterID",
+               "description":"The DatacenterID from avail.datacenters() where you wish to place this new Linode"
+            },
+            {  
+               "type":"java.lang.Integer",
+               "javaName":"planId",
+               "jsonName":"PlanID",
+               "description":"The desired PlanID available from avail.LinodePlans()"
+            }
+         ],
+         "optionalParameters":[
+            {  
+               "type":"java.lang.Integer",
+               "javaName":"paymentTerm",
+               "jsonName":"PaymentTerm",
+               "description":"Subscription term in months for prepaid customers. One of: 1, 12, or 24"
+            }
+         ],
+         "fixedParameters":[
+            {
+               "jsonName":"api_action",
+               "jsonValue":"linode.create"
+            }
+         ],
+         "url":"",
+         "description":"Creates a Linode and assigns you full privileges. There is a 75-linodes-per-hour limiter."
+      },
+      {  
+         "methodName":"deleteLinode",
+         "mandatoryParameters":[ 
+            {  
+               "type":"java.lang.Integer",
+               "javaName":"linodeId",
+               "jsonName":"LinodeID",
+               "description":"The LinodeID to delete"
+            }
+         ],
+         "optionalParameters":[
+            {  
+               "type":"java.lang.Boolean",
+               "javaName":"skipChecks",
+               "jsonName":"skipChecks",
+               "description":"Skips the safety checks and will always delete the Linode."
+            }
+         ],
+         "fixedParameters":[
+            {
+               "jsonName":"api_action",
+               "jsonValue":"linode.delete"
+            }
+         ],
+         "url":"",
+         "description":"Immediately removes a Linode from your account and issues a pro-rated credit back to your account, if applicable. To prevent accidental deletes, this requires the Linode has no Disk images. You must first delete its disk images."
+      },
+      {  
+         "methodName":"listLinode",
+         "mandatoryParameters":[ 
+            
+         ],
+         "optionalParameters":[
+            {  
+               "type":"java.lang.Integer",
+               "javaName":"linodeID",
+               "jsonName":"LinodeID",
+               "description":"Limits the list to the specified LinodeID"
+            }
+         ],
+         "fixedParameters":[
+            {
+               "jsonName":"api_action",
+               "jsonValue":"linode.list"
+            }
+         ],
+         "url":"",
+         "description":"Returns a list of all Linodes user has access or delete to, including some properties. Status values are -1: Being Created, 0: Brand New, 1: Running, and 2: Powered Off."
+      },
+      {  
+         "methodName":"rebootLinode",
+         "mandatoryParameters":[ 
+            {  
+               "type":"java.lang.Integer",
+               "javaName":"linodeId",
+               "jsonName":"LinodeID",
+               "description":""
+            }
+         ],
+         "optionalParameters":[
+            {  
+               "type":"java.lang.Integer",
+               "javaName":"configId",
+               "jsonName":"ConfigID",
+               "description":""
+            }
+         ],
+         "fixedParameters":[
+            {
+               "jsonName":"api_action",
+               "jsonValue":"linode.reboot"
+            }
+         ],
+         "url":"",
+         "description":"Issues a shutdown, and then boot job for a given LinodeID."
+      },
+      {  
+         "methodName":"resizeLinode",
+         "mandatoryParameters":[ 
+            {  
+               "type":"java.lang.Integer",
+               "javaName":"linodeId",
+               "jsonName":"LinodeID",
+               "description":""
+            },
+            {  
+               "type":"java.lang.Integer",
+               "javaName":"planId",
+               "jsonName":"PlanID",
+               "description":"The desired PlanID available from avail.LinodePlans()"
+            }
+         ],
+         "optionalParameters":[
+            
+         ],
+         "fixedParameters":[
+            {
+               "jsonName":"api_action",
+               "jsonValue":"linode.resize"
+            }
+         ],
+         "url":"",
+         "description":"Resizes a Linode from one plan to another. Immediately shuts the Linode down, charges/credits the account, and issue a migration to another host server."
+      },
+      {  
+         "methodName":"shutdownLinode",
+         "mandatoryParameters":[ 
+            {  
+               "type":"java.lang.Integer",
+               "javaName":"linodeId",
+               "jsonName":"LinodeID",
+               "description":""
+            }
+         ],
+         "optionalParameters":[
+            
+         ],
+         "fixedParameters":[
+            {
+               "jsonName":"api_action",
+               "jsonValue":"linode.shutdown"
+            }
+         ],
+         "url":"",
+         "description":"Issues a shutdown job for a given LinodeID."
+      },
+      {  
+         "methodName":"updateLinode",
+         "mandatoryParameters":[ 
+            {  
+               "type":"java.lang.Integer",
+               "javaName":"linodeId",
+               "jsonName":"LinodeID",
+               "description":""
+            }
+         ],
+         "optionalParameters":[
+            {  
+               "type":"java.lang.String",
+               "javaName":"label",
+               "jsonName":"Label",
+               "description":"This Linode's label"
+            },
+            {  
+               "type":"java.lang.String",
+               "javaName":"lpmDisplayGroup",
+               "jsonName":"lpm_displayGroup",
+               "description":"Display group in the Linode list inside the Linode Manager"
+            },
+            {  
+               "type":"java.lang.Boolean",
+               "javaName":"alertCpuEnabled",
+               "jsonName":"Alert_cpu_enabled",
+               "description":"Enable the cpu usage email alert"
+            },
+            {  
+               "type":"java.lang.Integer",
+               "javaName":"alertCpuThreshold",
+               "jsonName":"Alert_cpu_threshold",
+               "description":"CPU Alert threshold, percentage 0-800"
+            },
+            {  
+               "type":"java.lang.Boolean",
+               "javaName":"alertDiskIoEnabled",
+               "jsonName":"Alert_diskio_enabled",
+               "description":"Enable the disk IO email alert"
+            },
+            {  
+               "type":"java.lang.Integer",
+               "javaName":"alertDiskIoThreshold",
+               "jsonName":"Alert_diskio_threshold",
+               "description":"IO ops/sec"
+            },
+            {  
+               "type":"java.lang.Boolean",
+               "javaName":"alertBwInEnabled",
+               "jsonName":"Alert_bwin_enabled",
+               "description":"Enable the incoming bandwidth email alert"
+            },
+            {  
+               "type":"java.lang.Integer",
+               "javaName":"alertBwInThreshold",
+               "jsonName":"Alert_bwin_threshold",
+               "description":"Mb/sec"
+            },
+            {  
+               "type":"java.lang.Boolean",
+               "javaName":"alertBwOutEnabled",
+               "jsonName":"Alert_bwout_enabled",
+               "description":"Enable the outgoing bandwidth email alert"
+            },
+            {  
+               "type":"java.lang.Integer",
+               "javaName":"alertBwOutThreshold",
+               "jsonName":"Alert_bwout_threshold",
+               "description":"Mb/sec"
+            },
+            {  
+               "type":"java.lang.Boolean",
+               "javaName":"alertBwQuotaEnabled",
+               "jsonName":"Alert_bwquota_enabled",
+               "description":"Enable the bw quote email alert"
+            },
+            {  
+               "type":"java.lang.Integer",
+               "javaName":"alertBwQuotaThreshold",
+               "jsonName":"Alert_bwquota_threshold",
+               "description":"Percentage of monthly bw quota"
+            },
+            {  
+               "type":"java.lang.Integer",
+               "javaName":"backupWindow",
+               "jsonName":"backupWindow",
+               "description":""
+            },
+            {  
+               "type":"java.lang.Integer",
+               "javaName":"backupWeeklyDay",
+               "jsonName":"backupWeeklyDay",
+               "description":""
+            },
+            { 
+               "type":"java.lang.Boolean",
+               "javaName":"watchdog",
+               "jsonName":"watchdog",
+               "description":"Enable the Lassie shutdown watchdog"
+            },
+            {  
+               "type":"java.lang.Boolean",
+               "javaName":"msSshDisabled",
+               "jsonName":"ms_ssh_disabled",
+               "description":""
+            },
+            {  
+               "type":"java.lang.String",
+               "javaName":"msSshUser",
+               "jsonName":"ms_ssh_user",
+               "description":""
+            },
+            {  
+               "type":"java.lang.String",
+               "javaName":"msSshIp",
+               "jsonName":"ms_ssh_ip",
+               "description":""
+            },
+            {  
+               "type":"java.lang.Integer",
+               "javaName":"msSshPort",
+               "jsonName":"ms_ssh_port",
+               "description":""
+            }
+            
+            
+         ],
+         "fixedParameters":[
+            {
+               "jsonName":"api_action",
+               "jsonValue":"linode.update"
+            }
+         ],
+         "url":"",
+         "description":"Updates a Linode's properties."
       }
    ]
 }

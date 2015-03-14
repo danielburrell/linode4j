@@ -1,20 +1,18 @@
 package linode4j;
 
-import static org.junit.Assert.*;
-
 import org.junit.Test;
 
-import com.fasterxml.jackson.databind.JsonNode;
-
 import uk.co.solong.linode4j.Linode;
-import uk.co.solong.linode4j.bootlinode.BootLinodeResult;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
 
 public class LinodeBoot {
 
     @Test
-    public void test() {
-        Linode t = new Linode("apiKey");
-        BootLinodeResult node = t.bootLinode(1).withConfigId(2).go();
+    public void test() throws JsonProcessingException {
+        Linode t = new Linode("YwdWGZaCx202dFQFr0z1H7UFv204MXRtddK9we4udEaZoCAV8HMkg5RsdMUjTIrs");
+        String node = t.updateLinode(1).withAlertBwInEnabled(true).go();
+        System.out.println(node);
         
     }
 
