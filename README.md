@@ -28,4 +28,4 @@ List<DataCenter> dataCenters = template.getDataCenters();
 ```
 
 ##Legal
- - Based on the work by [theo](https://github.com/theo/linode-api)
+MIT License
