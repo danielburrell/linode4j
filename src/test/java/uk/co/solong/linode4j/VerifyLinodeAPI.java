@@ -1,4 +1,4 @@
-package linode4j;
+package uk.co.solong.linode4j;
 
 import org.junit.Test;
 
