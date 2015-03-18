@@ -35,7 +35,7 @@
                 }
             ],
             "url": "",
-            "description": "Issues a boot job for the provided ConfigID. If no ConfigID is provided boots the last used configuration profile, or the first configuration profile if this Linode has never been booted."
+            "description": "Issues a boot job for the provided ConfigID.  If no ConfigID is provided boots the last used configuration profile, or the first configuration profile if this Linode has never been booted."
         },
         {
             "methodName": "testEcho",
@@ -59,7 +59,8 @@
                     "jsonValue": "test.echo"
                 }
             ],
-            "url": ""
+            "url": "",
+            "description":"Echos back parameters that were passed in."
         },
         {
             "methodName": "cloneLinode",
@@ -98,7 +99,7 @@
                 }
             ],
             "url": "",
-            "description": "Creates a new Linode, assigns you full privileges, and then clones the specified LinodeID to the new Linode. There is a limit of 5 active clone operations per source Linode. It is recommended that the source Linode be powered down during the clone."
+            "description": "Creates a new Linode, assigns you full privileges, and then clones the specified LinodeID to the new Linode. There is a limit of 5 active clone operations per source Linode.  It is recommended that the source Linode be powered down during the clone."
         },
         {
             "methodName": "createLinode",
@@ -158,7 +159,7 @@
                 }
             ],
             "url": "",
-            "description": "Immediately removes a Linode from your account and issues a pro-rated credit back to your account, if applicable. To prevent accidental deletes, this requires the Linode has no Disk images. You must first delete its disk images."
+            "description": "Immediately removes a Linode from your account and issues a pro-rated credit back to your account, if applicable.  To prevent accidental deletes, this requires the Linode has no Disk images.  You must first delete its disk images.\""
         },
         {
             "methodName": "listLinode",
@@ -178,7 +179,7 @@
                 }
             ],
             "url": "",
-            "description": "Returns a list of all Linodes user has access or delete to, including some properties. Status values are -1: Being Created, 0: Brand New, 1: Running, and 2: Powered Off."
+            "description": "Returns a list of all Linodes user has access or delete to, including some properties.  Status values are -1: Being Created, 0: Brand New, 1: Running, and 2: Powered Off."
         },
         {
             "methodName": "rebootLinode",
@@ -231,7 +232,7 @@
                 }
             ],
             "url": "",
-            "description": "Resizes a Linode from one plan to another. Immediately shuts the Linode down, charges/credits the account, and issue a migration to another host server."
+            "description": "Resizes a Linode from one plan to another.  Immediately shuts the Linode down, charges/credits the account, and issue a migration to another host server."
         },
         {
             "methodName": "shutdownLinode",
@@ -797,7 +798,7 @@
                 {
                     "type": "java.lang.Integer",
                     "javaName": "size",
-                    "jsonName": "Size",
+                    "jsonName": "size",
                     "description": "The size of the disk image to creates. Defaults to the minimum size required for the requested image"
                 },
                 {
@@ -1092,7 +1093,7 @@
                 }
             ],
             "url": "",
-            "description": "Assigns a Private IP to a Linode. Returns the IPAddressID that was added."
+            "description": "Assigns a Private IP to a Linode.  Returns the IPAddressID that was added."
         },
         {
             "methodName": "addPublicIP",
@@ -1112,7 +1113,7 @@
                 }
             ],
             "url": "",
-            "description": "Assigns a Public IP to a Linode. Returns the IPAddressID and IPAddress that was added."
+            "description": "Assigns a Public IP to a Linode.  Returns the IPAddressID and IPAddress that was added."
         },
         {
             "methodName": "listIP",
@@ -1164,7 +1165,7 @@
                 }
             ],
             "url": "",
-            "description": "Sets the rDNS name of a Public IP. Returns the IPAddressID and IPAddress that were updated."
+            "description": "Sets the rDNS name of a Public IP.  Returns the IPAddressID and IPAddress that were updated."
         },
         {
             "methodName": "swapIp",
@@ -1174,15 +1175,15 @@
                     "javaName": "ipAddressId",
                     "jsonName": "IPAddressID",
                     "description": "The IPAddressID of an IP Address to transfer or swap"
-                },
+                }
+            ],
+            "optionalParameters": [
                 {
                     "type": "java.lang.Integer",
                     "javaName": "withIPAddressId",
                     "jsonName": "withIPAddressID",
                     "description": "The IP Address ID to swap"
-                }
-            ],
-            "optionalParameters": [
+                },
                 {
                     "type": "java.lang.Integer",
                     "javaName": "toLinodeId",
@@ -1197,7 +1198,7 @@
                 }
             ],
             "url": "",
-            "description": "Exchanges Public IP addresses between two Linodes within a Datacenter. The destination of the IP Address can be designated by either the toLinodeID or withIPAddressID parameter. Returns the resulting relationship of the Linode and IP Address parameters. When performing a one directional swap, the source is represented by the first of the two resultant array members."
+            "description": "Exchanges Public IP addresses between two Linodes within a Datacenter.  The destination of the IP Address can be designated by either the toLinodeID or withIPAddressID parameter.  Returns the resulting relationship of the Linode and IP Address parameters.  When performing a one directional swap, the source is represented by the first of the two resultant array members."
         },
         {
             "methodName": "listJobs",
@@ -1270,8 +1271,8 @@
             "mandatoryParameters": [
                 {
                     "type": "java.lang.Integer",
-                    "javaName": "datacenterId",
-                    "jsonName": "DatacenterID",
+                    "javaName": "nodeBalancerId",
+                    "jsonName": "NodeBalancerID",
                     "description": "The NodeBalancerID to delete"
                 }
             ],
@@ -1995,7 +1996,7 @@
                     "description": ""
                 },
                 {
-                    "type": "java.lang.Integer",
+                    "type": "java.lang.String",
                     "javaName": "lpmDisplayGroup",
                     "jsonName": "lpm_displayGroup",
                     "description": "Display group in the Domain list inside the Linode DNS Manager"
@@ -2007,13 +2008,13 @@
                     "description": "0, 1, or 2 (disabled, active, edit mode)"
                 },
                 {
-                    "type": "java.lang.Integer",
+                    "type": "java.lang.String",
                     "javaName": "masterIps",
                     "jsonName": "master_ips",
                     "description": "When type=slave, the zone's master DNS servers list, semicolon separated"
                 },
                 {
-                    "type": "java.lang.Integer",
+                    "type": "java.lang.String",
                     "javaName": "axfrIps",
                     "jsonName": "axfr_ips",
                     "description": "IP addresses allowed to AXFR the entire zone, semicolon separated"
@@ -2128,7 +2129,7 @@
                     "description": ""
                 },
                 {
-                    "type": "java.lang.Integer",
+                    "type": "java.lang.String",
                     "javaName": "lpmDisplayGroup",
                     "jsonName": "lpm_displayGroup",
                     "description": "Display group in the Domain list inside the Linode DNS Manager"
@@ -2140,13 +2141,13 @@
                     "description": "0, 1, or 2 (disabled, active, edit mode)"
                 },
                 {
-                    "type": "java.lang.Integer",
+                    "type": "java.lang.String",
                     "javaName": "masterIps",
                     "jsonName": "master_ips",
                     "description": "When type=slave, the zone's master DNS servers list, semicolon separated"
                 },
                 {
-                    "type": "java.lang.Integer",
+                    "type": "java.lang.String",
                     "javaName": "axfrIps",
                     "jsonName": "axfr_ips",
                     "description": "IP addresses allowed to AXFR the entire zone, semicolon separated"
@@ -2242,7 +2243,7 @@
                 {
                     "type": "java.lang.Integer",
                     "javaName": "resourceId",
-                    "jsonName": "ResourceId",
+                    "jsonName": "ResourceID",
                     "description": ""
                 }
             ],
@@ -2270,7 +2271,7 @@
                 {
                     "type": "java.lang.Integer",
                     "javaName": "resourceId",
-                    "jsonName": "ResourceId",
+                    "jsonName": "ResourceID",
                     "description": ""
                 }
             ],
@@ -2289,7 +2290,7 @@
                 {
                     "type": "java.lang.Integer",
                     "javaName": "resourceId",
-                    "jsonName": "ResourceId",
+                    "jsonName": "ResourceID",
                     "description": ""
                 }
             ],
@@ -2447,7 +2448,7 @@
                 }
             ],
             "url": "",
-            "description": "Authenticates a Linode Manager user against their username, password, and two-factor token (when enabled), and then returns a new API key, which can be used until it expires. The number of active keys is limited to 20."
+            "description": "Authenticates a Linode Manager user against their username, password, and two-factor token (when enabled), and then returns a new API key, which can be used until it expires.  The number of active keys is limited to 20."
         },
         {
             "methodName": "apiSpec",
@@ -2460,7 +2461,7 @@
                 }
             ],
             "url": "",
-            "description": "Returns a data structure of the entire Linode API specification. This method does not require authorization."
+            "description": "Returns a data structure of the entire Linode API specification.  This method does not require authorization.<br><br>For example: <a target=\"_blank\" href=\"https://api.linode.com/?api_action=api.spec\">https://api.linode.com/?api_action=api.spec</a>"
         },
         {
             "methodName": "availableDataCenters",
@@ -2585,6 +2586,101 @@
             ],
             "url": "",
             "description": "Returns a list of available public StackScripts."
+        },
+        {
+            "methodName": "generateLinodeWebConsoleToken",
+            "mandatoryParameters": [ 
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "linodeId",
+                    "jsonName": "LinodeID",
+                    "description": ""
+                }
+                ],
+            "optionalParameters": [
+               
+            ],
+            "fixedParameters": [
+                {
+                    "jsonName": "api_action",
+                    "jsonValue": "linode.webconsoletoken"
+                }
+            ],
+            "url": "",
+            "description": "Generates a console token starting a web console LISH session for the requesting IP"
+        },
+        {
+            "methodName": "updateAccountCard",
+            "mandatoryParameters": [ 
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "ccExpMonth",
+                    "jsonName": "ccExpMonth",
+                    "description": ""
+                },
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "ccExpYear",
+                    "jsonName": "ccExpYear",
+                    "description": ""
+                },
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "ccNumber",
+                    "jsonName": "ccNumber",
+                    "description": ""
+                }
+                ],
+            "optionalParameters": [
+               
+            ],
+            "fixedParameters": [
+                {
+                    "jsonName": "api_action",
+                    "jsonValue": "account.updatecard"
+                }
+            ],
+            "url": "",
+            "description": ""
+        },
+        {
+            "methodName": "mutateLinode",
+            "mandatoryParameters": [ 
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "linodeId",
+                    "jsonName": "LinodeID",
+                    "description": ""
+                }
+                ],
+            "optionalParameters": [
+               
+            ],
+            "fixedParameters": [
+                {
+                    "jsonName": "api_action",
+                    "jsonValue": "linode.mutate"
+                }
+            ],
+            "url": "",
+            "description": "Upgrades a Linode to its next generation."
+        },
+        {
+            "methodName": "payBalance",
+            "mandatoryParameters": [ 
+                
+                ],
+            "optionalParameters": [
+               
+            ],
+            "fixedParameters": [
+                {
+                    "jsonName": "api_action",
+                    "jsonValue": "account.paybalance"
+                }
+            ],
+            "url": "",
+            "description": "Pays current balance on file, returning it in the response."
         }
     ]
 }
