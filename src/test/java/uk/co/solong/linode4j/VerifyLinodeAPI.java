@@ -9,7 +9,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 public class VerifyLinodeAPI {
 
     @Test
-    public void test() throws JsonProcessingException {
+    public void apiLint() throws JsonProcessingException {
         Linode t = new Linode("notrequired");
         String apiSpec = t.apiSpec().go();
         System.out.println(apiSpec);
