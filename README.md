@@ -23,8 +23,8 @@ Java implementation of the Linode API
 ```
 
 ```java
-LinodeTemplate template = new LinodeTemplate("API_KEY");
-List<DataCenter> dataCenters = template.getDataCenters().asObject;
+Linode api = new Linode(API_KEY);
+api.updateDomain(4).withDescription("someDescription").withMasterIps("82.12.53.123");
 ```
 
 ##Legal
