@@ -38,6 +38,10 @@ Or (coming soon) as a nicely typed object
 Linode api = new Linode(API_KEY);
 DomainUpdateReply reply = api.updateDomain(4).withDescription("someDescription").withMasterIps("82.12.53.123").asObject();
 ```
+##API
+ made this library available on 18th March 2015. We welcome your feedback and hope to evolve this API gracefully.
 
 ##Legal
 MIT License
+linode4j is an open-source 3rd-party library (unofficial). The developers of linode4j are unaffilited with Linode. This library is provided as is without warranty.
+(c) 2015 Daniel Burrell
