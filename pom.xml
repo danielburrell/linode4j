@@ -85,7 +85,7 @@
         <plugins>
             <plugin>
                 <groupId>uk.co.solong</groupId>
-                <artifactId>rest2java</artifactId>
+                <artifactId>rest2java-maven-plugin</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
                 <executions>
                     <execution>
