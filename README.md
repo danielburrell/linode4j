@@ -39,7 +39,7 @@ Linode api = new Linode(API_KEY);
 DomainUpdateReply reply = api.updateDomain(4).withDescription("someDescription").withMasterIps("82.12.53.123").asObject();
 ```
 ##API
- made this library available on 18th March 2015. We welcome your feedback and hope to evolve this API gracefully.
+This library was first made available on 18th March 2015. We welcome your feedback and hope to evolve this API gracefully, however it is possible that major revisions (e.g. 1.0->2.0) may break backward compatibility.
 
 ##Legal
 MIT License
