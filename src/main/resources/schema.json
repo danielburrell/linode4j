@@ -1,1741 +1,2590 @@
-{  
-   "org":"uk.co.solong",
-   "serviceName":"Linode",
-   "apiName":"linode",
-   "defaultBaseUrl":"https://api.linode.com/",
-   "mandatoryPermaParams":[  
-      {  
-         "type":"java.lang.String",
-         "javaName":"apiKey",
-         "jsonName":"api_key"
-      }
-   ],
-   "methods":[  
-      {  
-         "methodName":"bootLinode",
-         "mandatoryParameters":[  
-            {  
-               "type":"java.lang.Integer",
-               "javaName":"linodeId",
-               "jsonName":"LinodeID"
-            }
-         ],
-         "optionalParameters":[  
-            {  
-               "type":"java.lang.Integer",
-               "javaName":"configId",
-               "jsonName":"ConfigID",
-               "description":"The ConfigID to boot, available from linode.config.list()."
-            }
-         ],
-         "fixedParameters":[
-            {
-               "jsonName":"api_action",
-               "jsonValue":"linode.boot"
-            }
-         ],
-         "url":"",
-         "description":"Issues a boot job for the provided ConfigID. If no ConfigID is provided boots the last used configuration profile, or the first configuration profile if this Linode has never been booted."
-      },
-      {  
-         "methodName":"testEcho",
-         "mandatoryParameters":[  
-            {  
-               "type":"java.lang.String",
-               "javaName":"mandatoryValueToEcho",
-               "jsonName":"mandatoryValueToEcho"
-            }
-         ],
-         "optionalParameters":[  
-            {  
-               "type":"java.lang.String",
-               "javaName":"optionalValueToEcho",
-               "jsonName":"optionalValueToEcho"
-            }
-         ],
-         "fixedParameters":[
-            {
-               "jsonName":"api_action",
-               "jsonValue":"test.echo"
-            }
-         ],
-         "url":""
-      },
-      {  
-         "methodName":"cloneLinode",
-         "mandatoryParameters":[  
-            {  
-               "type":"java.lang.Integer",
-               "javaName":"linodeId",
-               "jsonName":"LinodeID",
-               "description":"The LinodeID that you want cloned"
-            },
-            {  
-               "type":"java.lang.Integer",
-               "javaName":"datacenterId",
-               "jsonName":"DatacenterID",
-               "description":"The DatacenterID from avail.datacenters() where you wish to place this new Linode"
-            },
-            {  
-               "type":"java.lang.Integer",
-               "javaName":"planId",
-               "jsonName":"PlanID",
-               "description":"The desired PlanID available from avail.LinodePlans()"
-            }
-         ],
-         "optionalParameters":[  
-            {  
-               "type":"java.lang.Integer",
-               "javaName":"paymentTerm",
-               "jsonName":"PaymentTerm",
-               "description":"Subscription term in months for prepaid customers. One of: 1, 12, or 24"
-            }
-         ],
-         "fixedParameters":[
-            {
-               "jsonName":"api_action",
-               "jsonValue":"linode.clone"
-            }
-         ],
-         "url":"",
-         "description":"Creates a new Linode, assigns you full privileges, and then clones the specified LinodeID to the new Linode. There is a limit of 5 active clone operations per source Linode. It is recommended that the source Linode be powered down during the clone."
-      },
-      {  
-         "methodName":"createLinode",
-         "mandatoryParameters":[ 
-            {  
-               "type":"java.lang.Integer",
-               "javaName":"datacenterId",
-               "jsonName":"DatacenterID",
-               "description":"The DatacenterID from avail.datacenters() where you wish to place this new Linode"
-            },
-            {  
-               "type":"java.lang.Integer",
-               "javaName":"planId",
-               "jsonName":"PlanID",
-               "description":"The desired PlanID available from avail.LinodePlans()"
-            }
-         ],
-         "optionalParameters":[
-            {  
-               "type":"java.lang.Integer",
-               "javaName":"paymentTerm",
-               "jsonName":"PaymentTerm",
-               "description":"Subscription term in months for prepaid customers. One of: 1, 12, or 24"
-            }
-         ],
-         "fixedParameters":[
-            {
-               "jsonName":"api_action",
-               "jsonValue":"linode.create"
-            }
-         ],
-         "url":"",
-         "description":"Creates a Linode and assigns you full privileges. There is a 75-linodes-per-hour limiter."
-      },
-      {  
-         "methodName":"deleteLinode",
-         "mandatoryParameters":[ 
-            {  
-               "type":"java.lang.Integer",
-               "javaName":"linodeId",
-               "jsonName":"LinodeID",
-               "description":"The LinodeID to delete"
-            }
-         ],
-         "optionalParameters":[
-            {  
-               "type":"java.lang.Boolean",
-               "javaName":"skipChecks",
-               "jsonName":"skipChecks",
-               "description":"Skips the safety checks and will always delete the Linode."
-            }
-         ],
-         "fixedParameters":[
-            {
-               "jsonName":"api_action",
-               "jsonValue":"linode.delete"
-            }
-         ],
-         "url":"",
-         "description":"Immediately removes a Linode from your account and issues a pro-rated credit back to your account, if applicable. To prevent accidental deletes, this requires the Linode has no Disk images. You must first delete its disk images."
-      },
-      {  
-         "methodName":"listLinode",
-         "mandatoryParameters":[ 
-            
-         ],
-         "optionalParameters":[
-            {  
-               "type":"java.lang.Integer",
-               "javaName":"linodeID",
-               "jsonName":"LinodeID",
-               "description":"Limits the list to the specified LinodeID"
-            }
-         ],
-         "fixedParameters":[
-            {
-               "jsonName":"api_action",
-               "jsonValue":"linode.list"
-            }
-         ],
-         "url":"",
-         "description":"Returns a list of all Linodes user has access or delete to, including some properties. Status values are -1: Being Created, 0: Brand New, 1: Running, and 2: Powered Off."
-      },
-      {  
-         "methodName":"rebootLinode",
-         "mandatoryParameters":[ 
-            {  
-               "type":"java.lang.Integer",
-               "javaName":"linodeId",
-               "jsonName":"LinodeID",
-               "description":""
-            }
-         ],
-         "optionalParameters":[
-            {  
-               "type":"java.lang.Integer",
-               "javaName":"configId",
-               "jsonName":"ConfigID",
-               "description":""
-            }
-         ],
-         "fixedParameters":[
-            {
-               "jsonName":"api_action",
-               "jsonValue":"linode.reboot"
-            }
-         ],
-         "url":"",
-         "description":"Issues a shutdown, and then boot job for a given LinodeID."
-      },
-      {  
-         "methodName":"resizeLinode",
-         "mandatoryParameters":[ 
-            {  
-               "type":"java.lang.Integer",
-               "javaName":"linodeId",
-               "jsonName":"LinodeID",
-               "description":""
-            },
-            {  
-               "type":"java.lang.Integer",
-               "javaName":"planId",
-               "jsonName":"PlanID",
-               "description":"The desired PlanID available from avail.LinodePlans()"
-            }
-         ],
-         "optionalParameters":[
-            
-         ],
-         "fixedParameters":[
-            {
-               "jsonName":"api_action",
-               "jsonValue":"linode.resize"
-            }
-         ],
-         "url":"",
-         "description":"Resizes a Linode from one plan to another. Immediately shuts the Linode down, charges/credits the account, and issue a migration to another host server."
-      },
-      {  
-         "methodName":"shutdownLinode",
-         "mandatoryParameters":[ 
-            {  
-               "type":"java.lang.Integer",
-               "javaName":"linodeId",
-               "jsonName":"LinodeID",
-               "description":""
-            }
-         ],
-         "optionalParameters":[
-            
-         ],
-         "fixedParameters":[
-            {
-               "jsonName":"api_action",
-               "jsonValue":"linode.shutdown"
-            }
-         ],
-         "url":"",
-         "description":"Issues a shutdown job for a given LinodeID."
-      },
-      {  
-         "methodName":"updateLinode",
-         "mandatoryParameters":[ 
-            {  
-               "type":"java.lang.Integer",
-               "javaName":"linodeId",
-               "jsonName":"LinodeID",
-               "description":""
-            }
-         ],
-         "optionalParameters":[
-            {  
-               "type":"java.lang.String",
-               "javaName":"label",
-               "jsonName":"Label",
-               "description":"This Linode's label"
-            },
-            {  
-               "type":"java.lang.String",
-               "javaName":"lpmDisplayGroup",
-               "jsonName":"lpm_displayGroup",
-               "description":"Display group in the Linode list inside the Linode Manager"
-            },
-            {  
-               "type":"java.lang.Boolean",
-               "javaName":"alertCpuEnabled",
-               "jsonName":"Alert_cpu_enabled",
-               "description":"Enable the cpu usage email alert"
-            },
-            {  
-               "type":"java.lang.Integer",
-               "javaName":"alertCpuThreshold",
-               "jsonName":"Alert_cpu_threshold",
-               "description":"CPU Alert threshold, percentage 0-800"
-            },
-            {  
-               "type":"java.lang.Boolean",
-               "javaName":"alertDiskIoEnabled",
-               "jsonName":"Alert_diskio_enabled",
-               "description":"Enable the disk IO email alert"
-            },
-            {  
-               "type":"java.lang.Integer",
-               "javaName":"alertDiskIoThreshold",
-               "jsonName":"Alert_diskio_threshold",
-               "description":"IO ops/sec"
-            },
-            {  
-               "type":"java.lang.Boolean",
-               "javaName":"alertBwInEnabled",
-               "jsonName":"Alert_bwin_enabled",
-               "description":"Enable the incoming bandwidth email alert"
-            },
-            {  
-               "type":"java.lang.Integer",
-               "javaName":"alertBwInThreshold",
-               "jsonName":"Alert_bwin_threshold",
-               "description":"Mb/sec"
-            },
-            {  
-               "type":"java.lang.Boolean",
-               "javaName":"alertBwOutEnabled",
-               "jsonName":"Alert_bwout_enabled",
-               "description":"Enable the outgoing bandwidth email alert"
-            },
-            {  
-               "type":"java.lang.Integer",
-               "javaName":"alertBwOutThreshold",
-               "jsonName":"Alert_bwout_threshold",
-               "description":"Mb/sec"
-            },
-            {  
-               "type":"java.lang.Boolean",
-               "javaName":"alertBwQuotaEnabled",
-               "jsonName":"Alert_bwquota_enabled",
-               "description":"Enable the bw quote email alert"
-            },
-            {  
-               "type":"java.lang.Integer",
-               "javaName":"alertBwQuotaThreshold",
-               "jsonName":"Alert_bwquota_threshold",
-               "description":"Percentage of monthly bw quota"
-            },
-            {  
-               "type":"java.lang.Integer",
-               "javaName":"backupWindow",
-               "jsonName":"backupWindow",
-               "description":""
-            },
-            {  
-               "type":"java.lang.Integer",
-               "javaName":"backupWeeklyDay",
-               "jsonName":"backupWeeklyDay",
-               "description":""
-            },
-            { 
-               "type":"java.lang.Boolean",
-               "javaName":"watchdog",
-               "jsonName":"watchdog",
-               "description":"Enable the Lassie shutdown watchdog"
-            },
-            {  
-               "type":"java.lang.Boolean",
-               "javaName":"msSshDisabled",
-               "jsonName":"ms_ssh_disabled",
-               "description":""
-            },
-            {  
-               "type":"java.lang.String",
-               "javaName":"msSshUser",
-               "jsonName":"ms_ssh_user",
-               "description":""
-            },
-            {  
-               "type":"java.lang.String",
-               "javaName":"msSshIp",
-               "jsonName":"ms_ssh_ip",
-               "description":""
-            },
-            {  
-               "type":"java.lang.Integer",
-               "javaName":"msSshPort",
-               "jsonName":"ms_ssh_port",
-               "description":""
-            }
-            
-            
-         ],
-         "fixedParameters":[
-            {
-               "jsonName":"api_action",
-               "jsonValue":"linode.update"
-            }
-         ],
-         "url":"",
-         "description":"Updates a Linode's properties."
-      },
-      {  
-         "methodName":"createLinodeConfig",
-         "mandatoryParameters":[ 
-            {  
-               "type":"java.lang.Integer",
-               "javaName":"linodeId",
-               "jsonName":"LinodeID",
-               "description":""
-            },
-            {  
-               "type":"java.lang.Integer",
-               "javaName":"kernelId",
-               "jsonName":"KernelID",
-               "description":"The KernelID for this profile. Found in avail.kernels()"
-            },
-            {  
-               "type":"java.lang.String",
-               "javaName":"label",
-               "jsonName":"Label",
-               "description":"The Label for this profile"
-            },
-            {  
-               "type":"java.lang.String",
-               "javaName":"diskList",
-               "jsonName":"DiskList",
-               "description":"A comma delimited list of DiskIDs; position reflects device node. The 9th element for specifying the initrd."
-            }
-         ],
-         "optionalParameters":[
-            {  
-               "type":"java.lang.String",
-               "javaName":"comments",
-               "jsonName":"Comments",
-               "description":"Comments you wish to save along with this profile"
-            },
-            {  
-               "type":"java.lang.Integer",
-               "javaName":"ramLimit",
-               "jsonName":"RAMLimit",
-               "description":"RAMLimit in MB. 0 for max."
-            },
-            {  
-               "type":"java.lang.String",
-               "javaName":"runLevel",
-               "jsonName":"RunLevel",
-               "description":"One of 'default', 'single', 'binbash'"
-            },
-            {  
-               "type":"java.lang.Integer",
-               "javaName":"rootDeviceNum",
-               "jsonName":"RootDeviceNum",
-               "description":"Which device number (1-8) that contains the root partition. 0 to utilize RootDeviceCustom."
-            },
-            {  
-               "type":"java.lang.String",
-               "javaName":"rootDeviceCustom",
-               "jsonName":"RootDeviceCustom",
-               "description":"A custom root device setting."
-            },
-            {  
-               "type":"java.lang.Boolean",
-               "javaName":"rootDeviceRO",
-               "jsonName":"RootDeviceRO",
-               "description":"Enables the 'ro' kernel flag. Modern distros want this."
-            },
-            {  
-               "type":"java.lang.Boolean",
-               "javaName":"helperDisableUpdateDB",
-               "jsonName":"helper_disableUpdateDB",
-               "description":"Enable the disableUpdateDB filesystem helper"
-            },
-            {  
-               "type":"java.lang.Boolean",
-               "javaName":"helperXen",
-               "jsonName":"helper_xen",
-               "description":"Enable the Xen filesystem helper. Corrects fstab and inittab/upstart entries depending on the kernel you're booting. You want this."
-            },
-            {  
-               "type":"java.lang.Boolean",
-               "javaName":"helperDepmod",
-               "jsonName":"helper_depmod",
-               "description":"Creates an empty modprobe file for the kernel you're booting."
-            },
-            {  
-               "type":"java.lang.Boolean",
-               "javaName":"helperNetwork",
-               "jsonName":"helper_network",
-               "description":"Automatically creates network configuration files for your distro and places them into your filesystem."
-            },
-            {  
-               "type":"java.lang.Boolean",
-               "javaName":"devTmpFsAutomount",
-               "jsonName":"devtmpfs_automount",
-               "description":"Controls if pv_ops kernels should automount devtmpfs at boot."
-            }
-         ]
-         "fixedParameters":[
-            {
-               "jsonName":"api_action",
-               "jsonValue":"linode.config.create"
-            }
-         ],
-         "url":"",
-         "description":"Creates a Linode Configuration Profile."
-      },
-      {  
-         "methodName":"deleteLinodeConfig",
-         "mandatoryParameters":[ 
-            {  
-               "type":"java.lang.Integer",
-               "javaName":"linodeId",
-               "jsonName":"LinodeID",
-               "description":""
-            },
-            {  
-               "type":"java.lang.Integer",
-               "javaName":"configId",
-               "jsonName":"ConfigID",
-               "description":""
-            }
-         ],
-         "optionalParameters":[
-            
-         ],
-         "fixedParameters":[
-            {
-               "jsonName":"api_action",
-               "jsonValue":"linode.config.delete"
-            }
-         ],
-         "url":"",
-         "description":"Deletes a Linode Configuration Profile."
-      },
-      {  
-         "methodName":"listLinodeConfigs",
-         "mandatoryParameters":[ 
-            {  
-               "type":"java.lang.Integer",
-               "javaName":"linodeId",
-               "jsonName":"LinodeID",
-               "description":""
-            }
-         ],
-         "optionalParameters":[
-            {  
-               "type":"java.lang.Integer",
-               "javaName":"configId",
-               "jsonName":"ConfigID",
-               "description":""
-            }
-         ],
-         "fixedParameters":[
-            {
-               "jsonName":"api_action",
-               "jsonValue":"linode.config.list"
-            }
-         ],
-         "url":"",
-         "description":"Lists a Linode's Configuration Profiles."
-      },
-      {  
-         "methodName":"updateLinodeConfigs",
-         "mandatoryParameters":[ 
-            {  
-               "type":"java.lang.Integer",
-               "javaName":"configId",
-               "jsonName":"ConfigID",
-               "description":""
-            }
-         ],
-         "optionalParameters":[
-            {  
-               "type":"java.lang.Integer",
-               "javaName":"linodeId",
-               "jsonName":"LinodeID",
-               "description":""
-            },
-            {  
-               "type":"java.lang.Integer",
-               "javaName":"kernelId",
-               "jsonName":"KernelID",
-               "description":"The KernelID for this profile. Found in avail.kernels()"
-            },
-            {  
-               "type":"java.lang.String",
-               "javaName":"label",
-               "jsonName":"Label",
-               "description":"The Label for this profile"
-            },
-            {  
-               "type":"java.lang.String",
-               "javaName":"comments",
-               "jsonName":"Comments",
-               "description":"Comments you wish to save along with this profile"
-            },
-            {  
-               "type":"java.lang.Integer",
-               "javaName":"ramLimit",
-               "jsonName":"RAMLimit",
-               "description":"RAMLimit in MB. 0 for max."
-            },
-            {  
-               "type":"java.lang.String",
-               "javaName":"diskList",
-               "jsonName":"DiskList",
-               "description":"A comma delimited list of DiskIDs; position reflects device node. The 9th element for specifying the initrd."
-            },
-            {  
-               "type":"java.lang.String",
-               "javaName":"runLevel",
-               "jsonName":"RunLevel",
-               "description":"One of 'default', 'single', 'binbash'"
-            },
-            {  
-               "type":"java.lang.Integer",
-               "javaName":"rootDeviceNum",
-               "jsonName":"RootDeviceNum",
-               "description":"Which device number (1-8) that contains the root partition. 0 to utilize RootDeviceCustom."
-            },
-            {  
-               "type":"java.lang.String",
-               "javaName":"rootDeviceCustom",
-               "jsonName":"RootDeviceCustom",
-               "description":"A custom root device setting."
-            },
-            {  
-               "type":"java.lang.Boolean",
-               "javaName":"rootDeviceReadOnly",
-               "jsonName":"RootDeviceRO",
-               "description":"Enables the 'ro' kernel flag. Modern distros want this."
-            },
-            {  
-               "type":"java.lang.Boolean",
-               "javaName":"helperDisableUpdateDB",
-               "jsonName":"helper_disableUpdateDB",
-               "description":"Enable the disableUpdateDB filesystem helper"
-            },
-            {  
-               "type":"java.lang.Boolean",
-               "javaName":"helperXen",
-               "jsonName":"helper_xen",
-               "description":"Enable the Xen filesystem helper. Corrects fstab and inittab/upstart entries depending on the kernel you're booting. You want this."
-            },
-            {  
-               "type":"java.lang.Boolean",
-               "javaName":"helperDepmod",
-               "jsonName":"helper_depmod",
-               "description":"Creates an empty modprobe file for the kernel you're booting."
-            },
-            {  
-               "type":"java.lang.Boolean",
-               "javaName":"helperNetwork",
-               "jsonName":"helper_network",
-               "description":"Automatically creates network configuration files for your distro and places them into your filesystem."
-            },
-            {  
-               "type":"java.lang.Boolean",
-               "javaName":"devtmpfsAutomount",
-               "jsonName":"devtmpfs_automount",
-               "description":"Controls if pv_ops kernels should automount devtmpfs at boot."
-            }
-            
-         ],
-         "fixedParameters":[
-            {
-               "jsonName":"api_action",
-               "jsonValue":"linode.config.update"
-            }
-         ],
-         "url":"",
-         "description":"Updates a Linode Configuration Profile."
-      },
-      {  
-         "methodName":"createLinodeDisk",
-         "mandatoryParameters":[ 
-            {  
-               "type":"java.lang.Integer",
-               "javaName":"linodeId",
-               "jsonName":"LinodeID",
-               "description":""
-            },
-			{  
-               "type":"java.lang.String",
-               "javaName":"label",
-               "jsonName":"Label",
-               "description":"The display label for this Disk"
-            },
-			{  
-               "type":"java.lang.String",
-               "javaName":"type",
-               "jsonName":"Type",
-               "description":"The formatted type of this disk. Valid types are: ext3, ext4, swap, raw"
-            },
-			{  
-               "type":"java.lang.Integer",
-               "javaName":"size",
-               "jsonName":"Size",
-               "description":"The size in MB of this Disk"
-            }
-         ],
-         "optionalParameters":[
-            {  
-               "type":"java.lang.Integer",
-               "javaName":"fromDistributionId",
-               "jsonName":"FromDistributionID",
-               "description":""
-            },
-			{  
-               "type":"java.lang.String",
-               "javaName":"rootPass",
-               "jsonName":"rootPass",
-               "description":""
-            },
-			{  
-               "type":"java.lang.String",
-               "javaName":"rootSSHKey",
-               "jsonName":"rootSSHKey",
-               "description":""
-            },
-			{  
-               "type":"java.lang.Boolean",
-               "javaName":"isReadOnly",
-               "jsonName":"isReadOnly",
-               "description":"Enable forced read-only for this Disk"
-            }
-         ],
-         "fixedParameters":[
-            {
-               "jsonName":"api_action",
-               "jsonValue":"linode.disk.create"
-            }
-         ],
-         "url":"",
-         "description":""
-      },
-      {  
-         "methodName":"createLinodeDiskFromDistribution",
-         "mandatoryParameters":[ 
-            {  
-               "type":"java.lang.Integer",
-               "javaName":"linodeId",
-               "jsonName":"LinodeID",
-               "description":""
-            },
-			{  
-               "type":"java.lang.Integer",
-               "javaName":"distributionId",
-               "jsonName":"DistributionID",
-               "description":"The DistributionID to create this disk from. Found in avail.distributions()"
-            },
-			{  
-               "type":"java.lang.String",
-               "javaName":"label",
-               "jsonName":"Label",
-               "description":"The label of this new disk image"
-            },
-			{  
-               "type":"java.lang.Integer",
-               "javaName":"size",
-               "jsonName":"Size",
-               "description":"Size of this disk image in MB"
-            },
-			{  
-               "type":"java.lang.String",
-               "javaName":"rootPass",
-               "jsonName":"rootPass",
-               "description":"The root user's password"
-            }
-         ],
-         "optionalParameters":[
-            {  
-               "type":"java.lang.String",
-               "javaName":"rootSSHKey",
-               "jsonName":"rootSSHKey",
-               "description":"Optionally sets this string into /root/.ssh/authorized_keys upon distribution configuration."
-            }
-         ],
-         "fixedParameters":[
-            {
-               "jsonName":"api_action",
-               "jsonValue":"linode.disk.createfromdistribution"
-            }
-         ],
-         "url":"",
-         "description":""
-      },
-	  {  
-         "methodName":"createLinodeDiskFromImage",
-         "mandatoryParameters":[ 
-            {  
-               "type":"java.lang.Integer",
-               "javaName":"imageID",
-               "jsonName":"ImageID",
-               "description":"The ID of the frozen image to deploy from"
-            },
-			{  
-               "type":"java.lang.Integer",
-               "javaName":"linodeId",
-               "jsonName":"LinodeID",
-               "description":"Specifies the Linode to deploy on to"
-            }
-         ],
-         "optionalParameters":[
-			{  
-               "type":"java.lang.String",
-               "javaName":"label",
-               "jsonName":"Label",
-               "description":"The label of this new disk image"
-            },
-			{  
-               "type":"java.lang.Integer",
-               "javaName":"size",
-               "jsonName":"Size",
-               "description":"The size of the disk image to creates. Defaults to the minimum size required for the requested image"
-            },
-			{  
-               "type":"java.lang.String",
-               "javaName":"rootPass",
-               "jsonName":"rootPass",
-               "description":"Optionally sets the root password at deployment time. If a password is not provided the existing root password of the frozen image will not be modified"
-            },
-			{  
-               "type":"java.lang.String",
-               "javaName":"rootSSHKey",
-               "jsonName":"rootSSHKey",
-               "description":"Optionally sets this string into /root/.ssh/authorized_keys upon image deployment"
-            }
-         ],
-         "fixedParameters":[
-            {
-               "jsonName":"api_action",
-               "jsonValue":"linode.disk.createfromimage"
-            }
-         ],
-         "url":"",
-         "description":"Creates a new disk from a previously imagized disk."
-      },
-	  {  
-         "methodName":"createLinodeDiskFromStackScript",
-         "mandatoryParameters":[ 
-            {  
-               "type":"java.lang.Integer",
-               "javaName":"linodeId",
-               "jsonName":"LinodeID",
-               "description":""
-            },
-			{  
-               "type":"java.lang.Integer",
-               "javaName":"stackScriptId",
-               "jsonName":"StackScriptID",
-               "description":"The StackScript to create this image from"
-            },
-			{  
-               "type":"java.lang.String",
-               "javaName":"stackScriptUDFResponses",
-               "jsonName":"StackScriptUDFResponses",
-               "description":"JSON encoded name/value pairs, answering this StackScript's User Defined Fields"
-            },
-			{  
-               "type":"java.lang.Integer",
-               "javaName":"distributionId",
-               "jsonName":"DistributionID",
-               "description":"Which Distribution to apply this StackScript to. Must be one from the script's DistributionIDList"
-            },
-			{  
-               "type":"java.lang.String",
-               "javaName":"label",
-               "jsonName":"Label",
-               "description":"The label of this new disk image"
-            },
-			{  
-               "type":"java.lang.Integer",
-               "javaName":"size",
-               "jsonName":"Size",
-               "description":"Size of this disk image in MB"
-            },
-			{  
-               "type":"java.lang.String",
-               "javaName":"rootPass",
-               "jsonName":"rootPass",
-               "description":"The root user's password"
-            }
-         ],
-         "optionalParameters":[
-			,
-			{  
-               "type":"java.lang.String",
-               "javaName":"rootSSHKey",
-               "jsonName":"rootSSHKey",
-               "description":"Optionally sets this string into /root/.ssh/authorized_keys upon distribution configuration."
-            }
-         ],
-         "fixedParameters":[
-            {
-               "jsonName":"api_action",
-               "jsonValue":"linode.disk.createfromstackscript"
-            }
-         ],
-         "url":"",
-         "description":"Creates a new disk from a previously imagized disk."
-      },
-      {  
-         "methodName":"deleteLinodeDisk",
-         "mandatoryParameters":[ 
-            {  
-               "type":"java.lang.Integer",
-               "javaName":"linodeId",
-               "jsonName":"LinodeID",
-               "description":""
-            },
-			{  
-               "type":"java.lang.Integer",
-               "javaName":"diskId",
-               "jsonName":"DiskID",
-               "description":""
-            }
-         ],
-         "optionalParameters":[
-         ],
-         "fixedParameters":[
-            {
-               "jsonName":"api_action",
-               "jsonValue":"linode.disk.delete"
-            }
-         ],
-         "url":"",
-         "description":""
-      },
-      {  
-         "methodName":"duplicateLinodeDisk",
-         "mandatoryParameters":[ 
-            {  
-               "type":"java.lang.Integer",
-               "javaName":"linodeId",
-               "jsonName":"LinodeID",
-               "description":""
-            },
-			{  
-               "type":"java.lang.Integer",
-               "javaName":"diskId",
-               "jsonName":"DiskID",
-               "description":""
-            }
-         ],
-         "optionalParameters":[
-         ],
-         "fixedParameters":[
-            {
-               "jsonName":"api_action",
-               "jsonValue":"linode.disk.duplicate"
-            }
-         ],
-         "url":"",
-         "description":"Performs a bit-for-bit copy of a disk image."
-      },
-      {  
-         "methodName":"imagizeLinodeDisk",
-         "mandatoryParameters":[ 
-            {  
-               "type":"java.lang.Integer",
-               "javaName":"linodeId",
-               "jsonName":"LinodeID",
-               "description":"Specifies the source Linode to create the image from"
-            },
-			{  
-               "type":"java.lang.Integer",
-               "javaName":"diskId",
-               "jsonName":"DiskID",
-               "description":"Specifies the source Disk to create the image from"
-            }
-         ],
-         "optionalParameters":[
-			{  
-               "type":"java.lang.String",
-               "javaName":"description",
-               "jsonName":"Description",
-               "description":"An optional description of the created image"
-            },
-			{  
-               "type":"java.lang.String",
-               "javaName":"label",
-               "jsonName":"Label",
-               "description":"Sets the name of the image shown in the base image list, defaults to the source image label"
-            }
-         ],
-         "fixedParameters":[
-            {
-               "jsonName":"api_action",
-               "jsonValue":"linode.disk.imagize"
-            }
-         ],
-         "url":"",
-         "description":"Creates a gold-master image for future deployments"
-      },
-	  {  
-         "methodName":"listLinodeDisk",
-         "mandatoryParameters":[ 
-            {  
-               "type":"java.lang.Integer",
-               "javaName":"linodeId",
-               "jsonName":"LinodeID",
-               "description":""
-            }
-         ],
-         "optionalParameters":[
-			{  
-               "type":"java.lang.Integer",
-               "javaName":"diskId",
-               "jsonName":"DiskID",
-               "description":""
-            }
-         ],
-         "fixedParameters":[
-            {
-               "jsonName":"api_action",
-               "jsonValue":"linode.disk.list"
-            }
-         ],
-         "url":"",
-         "description":"Status values are 1: Ready and 2: Being Deleted."
-      },
-	  {  
-         "methodName":"resizeLinodeDisk",
-         "mandatoryParameters":[ 
-            {  
-               "type":"java.lang.Integer",
-               "javaName":"linodeId",
-               "jsonName":"LinodeID",
-               "description":""
-            },
-			{  
-               "type":"java.lang.Integer",
-               "javaName":"diskId",
-               "jsonName":"DiskID",
-               "description":""
-            },
-			{  
-               "type":"java.lang.Integer",
-               "javaName":"size",
-               "jsonName":"size",
-               "description":"The requested new size of this Disk in MB"
-            }
-         ],
-         "optionalParameters":[
-         ],
-         "fixedParameters":[
-            {
-               "jsonName":"api_action",
-               "jsonValue":"linode.disk.resize"
-            }
-         ],
-         "url":"",
-         "description":""
-      },
-	  {  
-         "methodName":"updateLinodeDisk",
-         "mandatoryParameters":[ 
-			{  
-               "type":"java.lang.Integer",
-               "javaName":"diskId",
-               "jsonName":"DiskID",
-               "description":""
-            }
-         ],
-         "optionalParameters":[
-			{  
-               "type":"java.lang.Integer",
-               "javaName":"linodeId",
-               "jsonName":"LinodeID",
-               "description":""
-            },
-			{  
-               "type":"java.lang.String",
-               "javaName":"label",
-               "jsonName":"Label",
-               "description":"The display label for this Disk"
-            }
-			{  
-               "type":"java.lang.Boolean",
-               "javaName":"isReadOnly",
-               "jsonName":"isReadOnly",
-               "description":"Enable forced read-only for this Disk"
-            }
-         ],
-         "fixedParameters":[
-            {
-               "jsonName":"api_action",
-               "jsonValue":"linode.disk.update"
-            }
-         ],
-         "url":"",
-         "description":""
-      },
-	  {  
-         "methodName":"addPrivateIP",
-         "mandatoryParameters":[ 
-			{  
-               "type":"java.lang.Integer",
-               "javaName":"linodeId",
-               "jsonName":"LinodeID",
-               "description":""
-            }
-         ],
-         "optionalParameters":[
-         ],
-         "fixedParameters":[
-            {
-               "jsonName":"api_action",
-               "jsonValue":"linode.ip.addprivate"
-            }
-         ],
-         "url":"",
-         "description":"Assigns a Private IP to a Linode. Returns the IPAddressID that was added."
-      },
-	  {  
-         "methodName":"addPublicIP",
-         "mandatoryParameters":[ 
-			{  
-               "type":"java.lang.Integer",
-               "javaName":"linodeId",
-               "jsonName":"LinodeID",
-               "description":"The LinodeID of the Linode that will be assigned an additional public IP address"
-            }
-         ],
-         "optionalParameters":[
-         ],
-         "fixedParameters":[
-            {
-               "jsonName":"api_action",
-               "jsonValue":"linode.ip.addpublic"
-            }
-         ],
-         "url":"",
-         "description":"Assigns a Public IP to a Linode. Returns the IPAddressID and IPAddress that was added."
-      },
-	  {  
-         "methodName":"listIP",
-         "mandatoryParameters":[ 
-         ],
-         "optionalParameters":[
-			{  
-               "type":"java.lang.Integer",
-               "javaName":"linodeId",
-               "jsonName":"LinodeID",
-               "description":"If specified, limits the result to this LinodeID"
-            },
-			{  
-               "type":"java.lang.Integer",
-               "javaName":"ipAddressId",
-               "jsonName":"IPAddressID",
-               "description":"If specified, limits the result to this IPAddressID"
-            }
-         ],
-         "fixedParameters":[
-            {
-               "jsonName":"api_action",
-               "jsonValue":"linode.ip.list"
-            }
-         ],
-         "url":"",
-         "description":"Returns the IP addresses of all Linodes you have access to."
-      },
-	  {  
-         "methodName":"setRdnsIP",
-         "mandatoryParameters":[ 
-		 {  
-               "type":"java.lang.Integer",
-               "javaName":"ipAddressId",
-               "jsonName":"IPAddressID",
-               "description":"The IPAddressID of the address to update"
-            },
-			{  
-               "type":"java.lang.String",
-               "javaName":"hostname",
-               "jsonName":"Hostname",
-               "description":"The hostname to set the reverse DNS to"
-            }
-         ],
-         "optionalParameters":[
-         ],
-         "fixedParameters":[
-            {
-               "jsonName":"api_action",
-               "jsonValue":"linode.ip.setrdns"
-            }
-         ],
-         "url":"",
-         "description":"Sets the rDNS name of a Public IP. Returns the IPAddressID and IPAddress that were updated."
-      },
-	  {  
-         "methodName":"swapIp",
-         "mandatoryParameters":[ 
-		 {  
-               "type":"java.lang.Integer",
-               "javaName":"ipAddressId",
-               "jsonName":"IPAddressID",
-               "description":"The IPAddressID of an IP Address to transfer or swap"
-            },
-			{  
-               "type":"java.lang.Integer",
-               "javaName":"withIPAddressId",
-               "jsonName":"withIPAddressID",
-               "description":"The IP Address ID to swap"
-            }
-         ],
-         "optionalParameters":[
-			{  
-               "type":"java.lang.Integer",
-               "javaName":"toLinodeId",
-               "jsonName":"toLinodeID",
-               "description":"The LinodeID of the Linode where IPAddressID will be transfered"
-            }
-         ],
-         "fixedParameters":[
-            {
-               "jsonName":"api_action",
-               "jsonValue":"linode.ip.swap"
-            }
-         ],
-         "url":"",
-         "description":"Exchanges Public IP addresses between two Linodes within a Datacenter. The destination of the IP Address can be designated by either the toLinodeID or withIPAddressID parameter. Returns the resulting relationship of the Linode and IP Address parameters. When performing a one directional swap, the source is represented by the first of the two resultant array members."
-      },
-	  {  
-         "methodName":"listJobs",
-         "mandatoryParameters":[ 
-		 {  
-               "type":"java.lang.Integer",
-               "javaName":"linodeId",
-               "jsonName":"LinodeID",
-               "description":""
-            }
-         ],
-         "optionalParameters":[
-			{  
-               "type":"java.lang.Integer",
-               "javaName":"jobId",
-               "jsonName":"JobID",
-               "description":"Limits the list to the specified JobID"
-            },
-			{  
-               "type":"java.lang.Boolean",
-               "javaName":"pendingOnly",
-               "jsonName":"pendingOnly",
-               "description":""
-            }
-         ],
-         "fixedParameters":[
-            {
-               "jsonName":"api_action",
-               "jsonValue":"linode.job.list"
-            }
-         ],
-         "url":"",
-         "description":""
-      },
-	  {  
-         "methodName":"createNodeBalancer",
-         "mandatoryParameters":[ 
-		 {  
-               "type":"java.lang.Integer",
-               "javaName":"datacenterId",
-               "jsonName":"DatacenterID",
-               "description":"The DatacenterID from avail.datacenters() where you wish to place this new NodeBalancer"
-            }
-         ],
-         "optionalParameters":[
-			{  
-               "type":"java.lang.String",
-               "javaName":"label",
-               "jsonName":"Label",
-               "description":"This NodeBalancer's label"
-            },
-			{  
-               "type":"java.lang.Integer",
-               "javaName":"clientConnThrottle",
-               "jsonName":"ClientConnThrottle",
-               "description":"To help mitigate abuse, throttle connections per second, per client IP. 0 to disable. Max of 20."
-            }
-         ],
-         "fixedParameters":[
-            {
-               "jsonName":"api_action",
-               "jsonValue":"nodebalancer.create"
-            }
-         ],
-         "url":"",
-         "description":""
-      },
-	  {  
-         "methodName":"deleteNodeBalancer",
-         "mandatoryParameters":[ 
-		 {  
-               "type":"java.lang.Integer",
-               "javaName":"datacenterId",
-               "jsonName":"DatacenterID",
-               "description":"The NodeBalancerID to delete"
-            }
-         ],
-         "optionalParameters":[
-         ],
-         "fixedParameters":[
-            {
-               "jsonName":"api_action",
-               "jsonValue":"nodebalancer.delete"
-            }
-         ],
-         "url":"",
-         "description":"Immediately removes a NodeBalancer from your account and issues a pro-rated credit back to your account, if applicable."
-      },
-	  {  
-         "methodName":"listNodeBalancers",
-         "mandatoryParameters":[ 
-         ],
-         "optionalParameters":[
-			{  
-               "type":"java.lang.Integer",
-               "javaName":"nodeBalancerId",
-               "jsonName":"NodeBalancerID",
-               "description":"Limits the list to the specified NodeBalancerID"
-            }
-         ],
-         "fixedParameters":[
-            {
-               "jsonName":"api_action",
-               "jsonValue":"nodebalancer.list"
-            }
-         ],
-         "url":"",
-         "description":"Returns a list of NodeBalancers this user has access or delete to, including their properties"
-      },
-	  {  
-         "methodName":"updateNodeBalancer",
-         "mandatoryParameters":[ 
-		 {  
-               "type":"java.lang.Integer",
-               "javaName":"nodeBalancerId",
-               "jsonName":"NodeBalancerID",
-               "description":""
-            }
-         ],
-         "optionalParameters":[
-			{  
-               "type":"java.lang.String",
-               "javaName":"label",
-               "jsonName":"Label",
-               "description":"This NodeBalancer's label"
-            },
-			{  
-               "type":"java.lang.Integer",
-               "javaName":"clientConnThrottle",
-               "jsonName":"ClientConnThrottle",
-               "description":"To help mitigate abuse, throttle connections per second, per client IP. 0 to disable. Max of 20."
-            }
-         ],
-         "fixedParameters":[
-            {
-               "jsonName":"api_action",
-               "jsonValue":"nodebalancer.update"
-            }
-         ],
-         "url":"",
-         "description":"Updates a NodeBalancer's properties"
-      },
-	  {  
-         "methodName":"createNodeBalancerConfig",
-         "mandatoryParameters":[ 
-			{  
-               "type":"java.lang.Integer",
-               "javaName":"nodeBalancerId",
-               "jsonName":"NodeBalancerID",
-               "description":"The parent NodeBalancer's ID"
-            }
-         ],
-         "optionalParameters":[
-			{  
-               "type":"java.lang.Integer",
-               "javaName":"port",
-               "jsonName":"Port",
-               "description":"Port to bind to on the public interfaces. 1-65534"
-            },
-			{  
-               "type":"java.lang.String",
-               "javaName":"protocol",
-               "jsonName":"Protocol",
-               "description":"Either 'tcp', 'http', or 'https'"
-            },
-			{  
-               "type":"java.lang.String",
-               "javaName":"algorithm",
-               "jsonName":"Algorithm",
-               "description":"Balancing algorithm. One of 'roundrobin', 'leastconn', 'source'"
-            },
-			{  
-               "type":"java.lang.String",
-               "javaName":"stickiness",
-               "jsonName":"Stickiness",
-               "description":"Session persistence. One of 'none', 'table', 'http_cookie'"
-            },
-			{  
-               "type":"java.lang.String",
-               "javaName":"check",
-               "jsonName":"check",
-               "description":"Perform active health checks on the backend nodes. One of 'connection', 'http', 'http_body'"
-            },
-			{  
-               "type":"java.lang.Integer",
-               "javaName":"checkInterval",
-               "jsonName":"check_interval",
-               "description":"Seconds between health check probes. 2-3600"
-            },
-			{  
-               "type":"java.lang.String",
-               "javaName":"checkTimeout",
-               "jsonName":"check_timeout",
-               "description":"Seconds to wait before considering the probe a failure. 1-30. Must be less than check_interval."
-            },
-			{  
-               "type":"java.lang.String",
-               "javaName":"checkAttempts",
-               "jsonName":"check_attempts",
-               "description":"Number of failed probes before taking a node out of rotation. 1-30"
-            },
-			{  
-               "type":"java.lang.String",
-               "javaName":"checkPath",
-               "jsonName":"check_path",
-               "description":"When check=http, the path to request"
-            },
-			{  
-               "type":"java.lang.String",
-               "javaName":"checkBody",
-               "jsonName":"check_body",
-               "description":"When check=http_body, a regex against the expected result body"
-            },
-			{  
-               "type":"java.lang.String",
-               "javaName":"sslCert",
-               "jsonName":"ssl_cert",
-               "description":"SSL certificate served by the NodeBalancer when the protocol is 'https'"
-            },
-			{  
-               "type":"java.lang.String",
-               "javaName":"sslKey",
-               "jsonName":"ssl_key",
-               "description":"Unpassphrased private key for the SSL certificate when protocol is 'https'"
-            }
-         ],
-         "fixedParameters":[
-            {
-               "jsonName":"api_action",
-               "jsonValue":"nodebalancer.config.create"
-            }
-         ],
-         "url":"",
-         "description":"Updates a NodeBalancer's properties"
-      },
-	  {  
-         "methodName":"deleteNodeBalancerConfig",
-         "mandatoryParameters":[ 
-			{  
-               "type":"java.lang.Integer",
-               "javaName":"nodeBalancerId",
-               "jsonName":"NodeBalancerID",
-               "description":""
-            },
-			{  
-               "type":"java.lang.Integer",
-               "javaName":"configId",
-               "jsonName":"ConfigID",
-               "description":"The ConfigID to delete"
-            }
-         ],
-         "optionalParameters":[
-         ],
-         "fixedParameters":[
-            {
-               "jsonName":"api_action",
-               "jsonValue":"nodebalancer.config.delete"
-            }
-         ],
-         "url":"",
-         "description":"Deletes a NodeBalancer's Config"
-      },
-	  {  
-         "methodName":"listNodeBalancerConfig",
-         "mandatoryParameters":[ 
-			{  
-               "type":"java.lang.Integer",
-               "javaName":"nodeBalancerId",
-               "jsonName":"NodeBalancerID",
-               "description":""
-            }
-         ],
-         "optionalParameters":[
-			{  
-               "type":"java.lang.Integer",
-               "javaName":"configId",
-               "jsonName":"ConfigID",
-               "description":"Limits the list to the specified ConfigID"
-            }
-         ],
-         "fixedParameters":[
-            {
-               "jsonName":"api_action",
-               "jsonValue":"nodebalancer.config.list"
-            }
-         ],
-         "url":"",
-         "description":"Returns a list of NodeBalancers this user has access or delete to, including their properties"
-      },
-	  {  
-         "methodName":"updateNodeBalancerConfig",
-         "mandatoryParameters":[ 
-			{  
-               "type":"java.lang.Integer",
-               "javaName":"configId",
-               "jsonName":"ConfigID",
-               "description":""
-            }
-         ],
-         "optionalParameters":[
-			{  
-               "type":"java.lang.Integer",
-               "javaName":"port",
-               "jsonName":"Port",
-               "description":"Port to bind to on the public interfaces. 1-65534"
-            },
-			{  
-               "type":"java.lang.String",
-               "javaName":"protocol",
-               "jsonName":"Protocol",
-               "description":"Either 'tcp', 'http', or 'https'"
-            },
-			{  
-               "type":"java.lang.String",
-               "javaName":"algorithm",
-               "jsonName":"Algorithm",
-               "description":"Balancing algorithm. One of 'roundrobin', 'leastconn', 'source'"
-            },
-			{  
-               "type":"java.lang.String",
-               "javaName":"stickiness",
-               "jsonName":"Stickiness",
-               "description":"Session persistence. One of 'none', 'table', 'http_cookie'"
-            },
-			{  
-               "type":"java.lang.String",
-               "javaName":"check",
-               "jsonName":"check",
-               "description":"Perform active health checks on the backend nodes. One of 'connection', 'http', 'http_body'"
-            },
-			{  
-               "type":"java.lang.Integer",
-               "javaName":"checkInterval",
-               "jsonName":"check_interval",
-               "description":"Seconds between health check probes. 2-3600"
-            },
-			{  
-               "type":"java.lang.String",
-               "javaName":"checkTimeout",
-               "jsonName":"check_timeout",
-               "description":"Seconds to wait before considering the probe a failure. 1-30. Must be less than check_interval."
-            },
-			{  
-               "type":"java.lang.String",
-               "javaName":"checkAttempts",
-               "jsonName":"check_attempts",
-               "description":"Number of failed probes before taking a node out of rotation. 1-30"
-            },
-			{  
-               "type":"java.lang.String",
-               "javaName":"checkPath",
-               "jsonName":"check_path",
-               "description":"When check=http, the path to request"
-            },
-			{  
-               "type":"java.lang.String",
-               "javaName":"checkBody",
-               "jsonName":"check_body",
-               "description":"When check=http_body, a regex against the expected result body"
-            },
-			{  
-               "type":"java.lang.String",
-               "javaName":"sslCert",
-               "jsonName":"ssl_cert",
-               "description":"SSL certificate served by the NodeBalancer when the protocol is 'https'"
-            },
-			{  
-               "type":"java.lang.String",
-               "javaName":"sslKey",
-               "jsonName":"ssl_key",
-               "description":"Unpassphrased private key for the SSL certificate when protocol is 'https'"
-            }
-         ],
-         "fixedParameters":[
-            {
-               "jsonName":"api_action",
-               "jsonValue":"nodebalancer.config.update"
-            }
-         ],
-         "url":"",
-         "description":"Updates a Config's properties"
-      },
-	  {  
-         "methodName":"createNodeBalancerNode",
-         "mandatoryParameters":[ 
-			{  
-               "type":"java.lang.Integer",
-               "javaName":"configId",
-               "jsonName":"ConfigID",
-               "description":"The parent ConfigID to attach this Node to"
-            },
-			{  
-               "type":"java.lang.String",
-               "javaName":"label",
-               "jsonName":"Label",
-               "description":"This backend Node's label"
-            },
-			{  
-               "type":"java.lang.String",
-               "javaName":"address",
-               "jsonName":"Address",
-               "description":"The address:port combination used to communicate with this Node"
-            }
-         ],
-         "optionalParameters":[
-			{  
-               "type":"java.lang.Integer",
-               "javaName":"weight",
-               "jsonName":"Weight",
-               "description":"Load balancing weight, 1-255. Higher means more connections."
-            },
-			{  
-               "type":"java.lang.String",
-               "javaName":"mode",
-               "jsonName":"Mode",
-               "description":"The connections mode for this node. One of 'accept', 'reject', or 'drain'"
-            }
-         ],
-         "fixedParameters":[
-            {
-               "jsonName":"api_action",
-               "jsonValue":"nodebalancer.node.create"
-            }
-         ],
-         "url":"",
-         "description":"Returns a list of NodeBalancers this user has access or delete to, including their properties"
-      },
-	  {  
-         "methodName":"deleteNodeBalancerNode",
-         "mandatoryParameters":[ 
-			{  
-               "type":"java.lang.Integer",
-               "javaName":"nodeId",
-               "jsonName":"NodeID",
-               "description":"The NodeID to delete"
-            }
-         ],
-         "optionalParameters":[
-         ],
-         "fixedParameters":[
-            {
-               "jsonName":"api_action",
-               "jsonValue":"nodebalancer.node.delete"
-            }
-         ],
-         "url":"",
-         "description":"Deletes a Node from a NodeBalancer Config"
-      },
-	  {  
-         "methodName":"listNodeBalancerNodes",
-         "mandatoryParameters":[ 
-			{  
-               "type":"java.lang.Integer",
-               "javaName":"configId",
-               "jsonName":"ConfigID",
-               "description":""
-            }
-         ],
-         "optionalParameters":[
-			{  
-               "type":"java.lang.Integer",
-               "javaName":"nodeId",
-               "jsonName":"NodeID",
-               "description":"Limits the list to the specified NodeID"
-            }
-         ],
-         "fixedParameters":[
-            {
-               "jsonName":"api_action",
-               "jsonValue":"nodebalancer.node.list"
-            }
-         ],
-         "url":"",
-         "description":"Returns a list of Nodes associated with a NodeBalancer Config"
-      },
-	  {  
-         "methodName":"updateNodeBalancerNode",
-         "mandatoryParameters":[ 
-			{  
-               "type":"java.lang.Integer",
-               "javaName":"nodeId",
-               "jsonName":"NodeID",
-               "description":""
-            }
-         ],
-         "optionalParameters":[
-			{  
-               "type":"java.lang.String",
-               "javaName":"label",
-               "jsonName":"Label",
-               "description":"This backend Node's label"
-            },
-			{  
-               "type":"java.lang.String",
-               "javaName":"address",
-               "jsonName":"Address",
-               "description":"The address:port combination used to communicate with this Node"
-            }
-			{  
-               "type":"java.lang.Integer",
-               "javaName":"weight",
-               "jsonName":"Weight",
-               "description":"Load balancing weight, 1-255. Higher means more connections."
-            },
-			{  
-               "type":"java.lang.String",
-               "javaName":"mode",
-               "jsonName":"Mode",
-               "description":"The connections mode for this node. One of 'accept', 'reject', or 'drain'"
-            }
-         ],
-         "fixedParameters":[
-            {
-               "jsonName":"api_action",
-               "jsonValue":"nodebalancer.node.update"
-            }
-         ],
-         "url":"",
-         "description":"Updates a Node's properties"
-      }
-   ]
+{
+    "org": "uk.co.solong",
+    "serviceName": "Linode",
+    "apiName": "linode",
+    "defaultBaseUrl": "https://api.linode.com/",
+    "mandatoryPermaParams": [
+        {
+            "type": "java.lang.String",
+            "javaName": "apiKey",
+            "jsonName": "api_key"
+        }
+    ],
+    "methods": [
+        {
+            "methodName": "bootLinode",
+            "mandatoryParameters": [
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "linodeId",
+                    "jsonName": "LinodeID"
+                }
+            ],
+            "optionalParameters": [
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "configId",
+                    "jsonName": "ConfigID",
+                    "description": "The ConfigID to boot, available from linode.config.list()."
+                }
+            ],
+            "fixedParameters": [
+                {
+                    "jsonName": "api_action",
+                    "jsonValue": "linode.boot"
+                }
+            ],
+            "url": "",
+            "description": "Issues a boot job for the provided ConfigID. If no ConfigID is provided boots the last used configuration profile, or the first configuration profile if this Linode has never been booted."
+        },
+        {
+            "methodName": "testEcho",
+            "mandatoryParameters": [
+                {
+                    "type": "java.lang.String",
+                    "javaName": "mandatoryValueToEcho",
+                    "jsonName": "mandatoryValueToEcho"
+                }
+            ],
+            "optionalParameters": [
+                {
+                    "type": "java.lang.String",
+                    "javaName": "optionalValueToEcho",
+                    "jsonName": "optionalValueToEcho"
+                }
+            ],
+            "fixedParameters": [
+                {
+                    "jsonName": "api_action",
+                    "jsonValue": "test.echo"
+                }
+            ],
+            "url": ""
+        },
+        {
+            "methodName": "cloneLinode",
+            "mandatoryParameters": [
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "linodeId",
+                    "jsonName": "LinodeID",
+                    "description": "The LinodeID that you want cloned"
+                },
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "datacenterId",
+                    "jsonName": "DatacenterID",
+                    "description": "The DatacenterID from avail.datacenters() where you wish to place this new Linode"
+                },
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "planId",
+                    "jsonName": "PlanID",
+                    "description": "The desired PlanID available from avail.LinodePlans()"
+                }
+            ],
+            "optionalParameters": [
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "paymentTerm",
+                    "jsonName": "PaymentTerm",
+                    "description": "Subscription term in months for prepaid customers. One of: 1, 12, or 24"
+                }
+            ],
+            "fixedParameters": [
+                {
+                    "jsonName": "api_action",
+                    "jsonValue": "linode.clone"
+                }
+            ],
+            "url": "",
+            "description": "Creates a new Linode, assigns you full privileges, and then clones the specified LinodeID to the new Linode. There is a limit of 5 active clone operations per source Linode. It is recommended that the source Linode be powered down during the clone."
+        },
+        {
+            "methodName": "createLinode",
+            "mandatoryParameters": [
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "datacenterId",
+                    "jsonName": "DatacenterID",
+                    "description": "The DatacenterID from avail.datacenters() where you wish to place this new Linode"
+                },
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "planId",
+                    "jsonName": "PlanID",
+                    "description": "The desired PlanID available from avail.LinodePlans()"
+                }
+            ],
+            "optionalParameters": [
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "paymentTerm",
+                    "jsonName": "PaymentTerm",
+                    "description": "Subscription term in months for prepaid customers. One of: 1, 12, or 24"
+                }
+            ],
+            "fixedParameters": [
+                {
+                    "jsonName": "api_action",
+                    "jsonValue": "linode.create"
+                }
+            ],
+            "url": "",
+            "description": "Creates a Linode and assigns you full privileges. There is a 75-linodes-per-hour limiter."
+        },
+        {
+            "methodName": "deleteLinode",
+            "mandatoryParameters": [
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "linodeId",
+                    "jsonName": "LinodeID",
+                    "description": "The LinodeID to delete"
+                }
+            ],
+            "optionalParameters": [
+                {
+                    "type": "java.lang.Boolean",
+                    "javaName": "skipChecks",
+                    "jsonName": "skipChecks",
+                    "description": "Skips the safety checks and will always delete the Linode."
+                }
+            ],
+            "fixedParameters": [
+                {
+                    "jsonName": "api_action",
+                    "jsonValue": "linode.delete"
+                }
+            ],
+            "url": "",
+            "description": "Immediately removes a Linode from your account and issues a pro-rated credit back to your account, if applicable. To prevent accidental deletes, this requires the Linode has no Disk images. You must first delete its disk images."
+        },
+        {
+            "methodName": "listLinode",
+            "mandatoryParameters": [],
+            "optionalParameters": [
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "linodeID",
+                    "jsonName": "LinodeID",
+                    "description": "Limits the list to the specified LinodeID"
+                }
+            ],
+            "fixedParameters": [
+                {
+                    "jsonName": "api_action",
+                    "jsonValue": "linode.list"
+                }
+            ],
+            "url": "",
+            "description": "Returns a list of all Linodes user has access or delete to, including some properties. Status values are -1: Being Created, 0: Brand New, 1: Running, and 2: Powered Off."
+        },
+        {
+            "methodName": "rebootLinode",
+            "mandatoryParameters": [
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "linodeId",
+                    "jsonName": "LinodeID",
+                    "description": ""
+                }
+            ],
+            "optionalParameters": [
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "configId",
+                    "jsonName": "ConfigID",
+                    "description": ""
+                }
+            ],
+            "fixedParameters": [
+                {
+                    "jsonName": "api_action",
+                    "jsonValue": "linode.reboot"
+                }
+            ],
+            "url": "",
+            "description": "Issues a shutdown, and then boot job for a given LinodeID."
+        },
+        {
+            "methodName": "resizeLinode",
+            "mandatoryParameters": [
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "linodeId",
+                    "jsonName": "LinodeID",
+                    "description": ""
+                },
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "planId",
+                    "jsonName": "PlanID",
+                    "description": "The desired PlanID available from avail.LinodePlans()"
+                }
+            ],
+            "optionalParameters": [],
+            "fixedParameters": [
+                {
+                    "jsonName": "api_action",
+                    "jsonValue": "linode.resize"
+                }
+            ],
+            "url": "",
+            "description": "Resizes a Linode from one plan to another. Immediately shuts the Linode down, charges/credits the account, and issue a migration to another host server."
+        },
+        {
+            "methodName": "shutdownLinode",
+            "mandatoryParameters": [
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "linodeId",
+                    "jsonName": "LinodeID",
+                    "description": ""
+                }
+            ],
+            "optionalParameters": [],
+            "fixedParameters": [
+                {
+                    "jsonName": "api_action",
+                    "jsonValue": "linode.shutdown"
+                }
+            ],
+            "url": "",
+            "description": "Issues a shutdown job for a given LinodeID."
+        },
+        {
+            "methodName": "updateLinode",
+            "mandatoryParameters": [
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "linodeId",
+                    "jsonName": "LinodeID",
+                    "description": ""
+                }
+            ],
+            "optionalParameters": [
+                {
+                    "type": "java.lang.String",
+                    "javaName": "label",
+                    "jsonName": "Label",
+                    "description": "This Linode's label"
+                },
+                {
+                    "type": "java.lang.String",
+                    "javaName": "lpmDisplayGroup",
+                    "jsonName": "lpm_displayGroup",
+                    "description": "Display group in the Linode list inside the Linode Manager"
+                },
+                {
+                    "type": "java.lang.Boolean",
+                    "javaName": "alertCpuEnabled",
+                    "jsonName": "Alert_cpu_enabled",
+                    "description": "Enable the cpu usage email alert"
+                },
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "alertCpuThreshold",
+                    "jsonName": "Alert_cpu_threshold",
+                    "description": "CPU Alert threshold, percentage 0-800"
+                },
+                {
+                    "type": "java.lang.Boolean",
+                    "javaName": "alertDiskIoEnabled",
+                    "jsonName": "Alert_diskio_enabled",
+                    "description": "Enable the disk IO email alert"
+                },
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "alertDiskIoThreshold",
+                    "jsonName": "Alert_diskio_threshold",
+                    "description": "IO ops/sec"
+                },
+                {
+                    "type": "java.lang.Boolean",
+                    "javaName": "alertBwInEnabled",
+                    "jsonName": "Alert_bwin_enabled",
+                    "description": "Enable the incoming bandwidth email alert"
+                },
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "alertBwInThreshold",
+                    "jsonName": "Alert_bwin_threshold",
+                    "description": "Mb/sec"
+                },
+                {
+                    "type": "java.lang.Boolean",
+                    "javaName": "alertBwOutEnabled",
+                    "jsonName": "Alert_bwout_enabled",
+                    "description": "Enable the outgoing bandwidth email alert"
+                },
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "alertBwOutThreshold",
+                    "jsonName": "Alert_bwout_threshold",
+                    "description": "Mb/sec"
+                },
+                {
+                    "type": "java.lang.Boolean",
+                    "javaName": "alertBwQuotaEnabled",
+                    "jsonName": "Alert_bwquota_enabled",
+                    "description": "Enable the bw quote email alert"
+                },
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "alertBwQuotaThreshold",
+                    "jsonName": "Alert_bwquota_threshold",
+                    "description": "Percentage of monthly bw quota"
+                },
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "backupWindow",
+                    "jsonName": "backupWindow",
+                    "description": ""
+                },
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "backupWeeklyDay",
+                    "jsonName": "backupWeeklyDay",
+                    "description": ""
+                },
+                {
+                    "type": "java.lang.Boolean",
+                    "javaName": "watchdog",
+                    "jsonName": "watchdog",
+                    "description": "Enable the Lassie shutdown watchdog"
+                },
+                {
+                    "type": "java.lang.Boolean",
+                    "javaName": "msSshDisabled",
+                    "jsonName": "ms_ssh_disabled",
+                    "description": ""
+                },
+                {
+                    "type": "java.lang.String",
+                    "javaName": "msSshUser",
+                    "jsonName": "ms_ssh_user",
+                    "description": ""
+                },
+                {
+                    "type": "java.lang.String",
+                    "javaName": "msSshIp",
+                    "jsonName": "ms_ssh_ip",
+                    "description": ""
+                },
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "msSshPort",
+                    "jsonName": "ms_ssh_port",
+                    "description": ""
+                }
+            ],
+            "fixedParameters": [
+                {
+                    "jsonName": "api_action",
+                    "jsonValue": "linode.update"
+                }
+            ],
+            "url": "",
+            "description": "Updates a Linode's properties."
+        },
+        {
+            "methodName": "createLinodeConfig",
+            "mandatoryParameters": [
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "linodeId",
+                    "jsonName": "LinodeID",
+                    "description": ""
+                },
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "kernelId",
+                    "jsonName": "KernelID",
+                    "description": "The KernelID for this profile. Found in avail.kernels()"
+                },
+                {
+                    "type": "java.lang.String",
+                    "javaName": "label",
+                    "jsonName": "Label",
+                    "description": "The Label for this profile"
+                },
+                {
+                    "type": "java.lang.String",
+                    "javaName": "diskList",
+                    "jsonName": "DiskList",
+                    "description": "A comma delimited list of DiskIDs; position reflects device node. The 9th element for specifying the initrd."
+                }
+            ],
+            "optionalParameters": [
+                {
+                    "type": "java.lang.String",
+                    "javaName": "comments",
+                    "jsonName": "Comments",
+                    "description": "Comments you wish to save along with this profile"
+                },
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "ramLimit",
+                    "jsonName": "RAMLimit",
+                    "description": "RAMLimit in MB. 0 for max."
+                },
+                {
+                    "type": "java.lang.String",
+                    "javaName": "runLevel",
+                    "jsonName": "RunLevel",
+                    "description": "One of 'default', 'single', 'binbash'"
+                },
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "rootDeviceNum",
+                    "jsonName": "RootDeviceNum",
+                    "description": "Which device number (1-8) that contains the root partition. 0 to utilize RootDeviceCustom."
+                },
+                {
+                    "type": "java.lang.String",
+                    "javaName": "rootDeviceCustom",
+                    "jsonName": "RootDeviceCustom",
+                    "description": "A custom root device setting."
+                },
+                {
+                    "type": "java.lang.Boolean",
+                    "javaName": "rootDeviceRO",
+                    "jsonName": "RootDeviceRO",
+                    "description": "Enables the 'ro' kernel flag. Modern distros want this."
+                },
+                {
+                    "type": "java.lang.Boolean",
+                    "javaName": "helperDisableUpdateDB",
+                    "jsonName": "helper_disableUpdateDB",
+                    "description": "Enable the disableUpdateDB filesystem helper"
+                },
+                {
+                    "type": "java.lang.Boolean",
+                    "javaName": "helperXen",
+                    "jsonName": "helper_xen",
+                    "description": "Enable the Xen filesystem helper. Corrects fstab and inittab/upstart entries depending on the kernel you're booting. You want this."
+                },
+                {
+                    "type": "java.lang.Boolean",
+                    "javaName": "helperDepmod",
+                    "jsonName": "helper_depmod",
+                    "description": "Creates an empty modprobe file for the kernel you're booting."
+                },
+                {
+                    "type": "java.lang.Boolean",
+                    "javaName": "helperNetwork",
+                    "jsonName": "helper_network",
+                    "description": "Automatically creates network configuration files for your distro and places them into your filesystem."
+                },
+                {
+                    "type": "java.lang.Boolean",
+                    "javaName": "devTmpFsAutomount",
+                    "jsonName": "devtmpfs_automount",
+                    "description": "Controls if pv_ops kernels should automount devtmpfs at boot."
+                }
+            ],
+            "fixedParameters": [
+                {
+                    "jsonName": "api_action",
+                    "jsonValue": "linode.config.create"
+                }
+            ],
+            "url": "",
+            "description": "Creates a Linode Configuration Profile."
+        },
+        {
+            "methodName": "deleteLinodeConfig",
+            "mandatoryParameters": [
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "linodeId",
+                    "jsonName": "LinodeID",
+                    "description": ""
+                },
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "configId",
+                    "jsonName": "ConfigID",
+                    "description": ""
+                }
+            ],
+            "optionalParameters": [],
+            "fixedParameters": [
+                {
+                    "jsonName": "api_action",
+                    "jsonValue": "linode.config.delete"
+                }
+            ],
+            "url": "",
+            "description": "Deletes a Linode Configuration Profile."
+        },
+        {
+            "methodName": "listLinodeConfigs",
+            "mandatoryParameters": [
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "linodeId",
+                    "jsonName": "LinodeID",
+                    "description": ""
+                }
+            ],
+            "optionalParameters": [
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "configId",
+                    "jsonName": "ConfigID",
+                    "description": ""
+                }
+            ],
+            "fixedParameters": [
+                {
+                    "jsonName": "api_action",
+                    "jsonValue": "linode.config.list"
+                }
+            ],
+            "url": "",
+            "description": "Lists a Linode's Configuration Profiles."
+        },
+        {
+            "methodName": "updateLinodeConfigs",
+            "mandatoryParameters": [
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "configId",
+                    "jsonName": "ConfigID",
+                    "description": ""
+                }
+            ],
+            "optionalParameters": [
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "linodeId",
+                    "jsonName": "LinodeID",
+                    "description": ""
+                },
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "kernelId",
+                    "jsonName": "KernelID",
+                    "description": "The KernelID for this profile. Found in avail.kernels()"
+                },
+                {
+                    "type": "java.lang.String",
+                    "javaName": "label",
+                    "jsonName": "Label",
+                    "description": "The Label for this profile"
+                },
+                {
+                    "type": "java.lang.String",
+                    "javaName": "comments",
+                    "jsonName": "Comments",
+                    "description": "Comments you wish to save along with this profile"
+                },
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "ramLimit",
+                    "jsonName": "RAMLimit",
+                    "description": "RAMLimit in MB. 0 for max."
+                },
+                {
+                    "type": "java.lang.String",
+                    "javaName": "diskList",
+                    "jsonName": "DiskList",
+                    "description": "A comma delimited list of DiskIDs; position reflects device node. The 9th element for specifying the initrd."
+                },
+                {
+                    "type": "java.lang.String",
+                    "javaName": "runLevel",
+                    "jsonName": "RunLevel",
+                    "description": "One of 'default', 'single', 'binbash'"
+                },
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "rootDeviceNum",
+                    "jsonName": "RootDeviceNum",
+                    "description": "Which device number (1-8) that contains the root partition. 0 to utilize RootDeviceCustom."
+                },
+                {
+                    "type": "java.lang.String",
+                    "javaName": "rootDeviceCustom",
+                    "jsonName": "RootDeviceCustom",
+                    "description": "A custom root device setting."
+                },
+                {
+                    "type": "java.lang.Boolean",
+                    "javaName": "rootDeviceReadOnly",
+                    "jsonName": "RootDeviceRO",
+                    "description": "Enables the 'ro' kernel flag. Modern distros want this."
+                },
+                {
+                    "type": "java.lang.Boolean",
+                    "javaName": "helperDisableUpdateDB",
+                    "jsonName": "helper_disableUpdateDB",
+                    "description": "Enable the disableUpdateDB filesystem helper"
+                },
+                {
+                    "type": "java.lang.Boolean",
+                    "javaName": "helperXen",
+                    "jsonName": "helper_xen",
+                    "description": "Enable the Xen filesystem helper. Corrects fstab and inittab/upstart entries depending on the kernel you're booting. You want this."
+                },
+                {
+                    "type": "java.lang.Boolean",
+                    "javaName": "helperDepmod",
+                    "jsonName": "helper_depmod",
+                    "description": "Creates an empty modprobe file for the kernel you're booting."
+                },
+                {
+                    "type": "java.lang.Boolean",
+                    "javaName": "helperNetwork",
+                    "jsonName": "helper_network",
+                    "description": "Automatically creates network configuration files for your distro and places them into your filesystem."
+                },
+                {
+                    "type": "java.lang.Boolean",
+                    "javaName": "devtmpfsAutomount",
+                    "jsonName": "devtmpfs_automount",
+                    "description": "Controls if pv_ops kernels should automount devtmpfs at boot."
+                }
+            ],
+            "fixedParameters": [
+                {
+                    "jsonName": "api_action",
+                    "jsonValue": "linode.config.update"
+                }
+            ],
+            "url": "",
+            "description": "Updates a Linode Configuration Profile."
+        },
+        {
+            "methodName": "createLinodeDisk",
+            "mandatoryParameters": [
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "linodeId",
+                    "jsonName": "LinodeID",
+                    "description": ""
+                },
+                {
+                    "type": "java.lang.String",
+                    "javaName": "label",
+                    "jsonName": "Label",
+                    "description": "The display label for this Disk"
+                },
+                {
+                    "type": "java.lang.String",
+                    "javaName": "type",
+                    "jsonName": "Type",
+                    "description": "The formatted type of this disk. Valid types are: ext3, ext4, swap, raw"
+                },
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "size",
+                    "jsonName": "Size",
+                    "description": "The size in MB of this Disk"
+                }
+            ],
+            "optionalParameters": [
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "fromDistributionId",
+                    "jsonName": "FromDistributionID",
+                    "description": ""
+                },
+                {
+                    "type": "java.lang.String",
+                    "javaName": "rootPass",
+                    "jsonName": "rootPass",
+                    "description": ""
+                },
+                {
+                    "type": "java.lang.String",
+                    "javaName": "rootSSHKey",
+                    "jsonName": "rootSSHKey",
+                    "description": ""
+                },
+                {
+                    "type": "java.lang.Boolean",
+                    "javaName": "isReadOnly",
+                    "jsonName": "isReadOnly",
+                    "description": "Enable forced read-only for this Disk"
+                }
+            ],
+            "fixedParameters": [
+                {
+                    "jsonName": "api_action",
+                    "jsonValue": "linode.disk.create"
+                }
+            ],
+            "url": "",
+            "description": ""
+        },
+        {
+            "methodName": "createLinodeDiskFromDistribution",
+            "mandatoryParameters": [
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "linodeId",
+                    "jsonName": "LinodeID",
+                    "description": ""
+                },
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "distributionId",
+                    "jsonName": "DistributionID",
+                    "description": "The DistributionID to create this disk from. Found in avail.distributions()"
+                },
+                {
+                    "type": "java.lang.String",
+                    "javaName": "label",
+                    "jsonName": "Label",
+                    "description": "The label of this new disk image"
+                },
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "size",
+                    "jsonName": "Size",
+                    "description": "Size of this disk image in MB"
+                },
+                {
+                    "type": "java.lang.String",
+                    "javaName": "rootPass",
+                    "jsonName": "rootPass",
+                    "description": "The root user's password"
+                }
+            ],
+            "optionalParameters": [
+                {
+                    "type": "java.lang.String",
+                    "javaName": "rootSSHKey",
+                    "jsonName": "rootSSHKey",
+                    "description": "Optionally sets this string into /root/.ssh/authorized_keys upon distribution configuration."
+                }
+            ],
+            "fixedParameters": [
+                {
+                    "jsonName": "api_action",
+                    "jsonValue": "linode.disk.createfromdistribution"
+                }
+            ],
+            "url": "",
+            "description": ""
+        },
+        {
+            "methodName": "createLinodeDiskFromImage",
+            "mandatoryParameters": [
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "imageID",
+                    "jsonName": "ImageID",
+                    "description": "The ID of the frozen image to deploy from"
+                },
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "linodeId",
+                    "jsonName": "LinodeID",
+                    "description": "Specifies the Linode to deploy on to"
+                }
+            ],
+            "optionalParameters": [
+                {
+                    "type": "java.lang.String",
+                    "javaName": "label",
+                    "jsonName": "Label",
+                    "description": "The label of this new disk image"
+                },
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "size",
+                    "jsonName": "Size",
+                    "description": "The size of the disk image to creates. Defaults to the minimum size required for the requested image"
+                },
+                {
+                    "type": "java.lang.String",
+                    "javaName": "rootPass",
+                    "jsonName": "rootPass",
+                    "description": "Optionally sets the root password at deployment time. If a password is not provided the existing root password of the frozen image will not be modified"
+                },
+                {
+                    "type": "java.lang.String",
+                    "javaName": "rootSSHKey",
+                    "jsonName": "rootSSHKey",
+                    "description": "Optionally sets this string into /root/.ssh/authorized_keys upon image deployment"
+                }
+            ],
+            "fixedParameters": [
+                {
+                    "jsonName": "api_action",
+                    "jsonValue": "linode.disk.createfromimage"
+                }
+            ],
+            "url": "",
+            "description": "Creates a new disk from a previously imagized disk."
+        },
+        {
+            "methodName": "createLinodeDiskFromStackScript",
+            "mandatoryParameters": [
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "linodeId",
+                    "jsonName": "LinodeID",
+                    "description": ""
+                },
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "stackScriptId",
+                    "jsonName": "StackScriptID",
+                    "description": "The StackScript to create this image from"
+                },
+                {
+                    "type": "java.lang.String",
+                    "javaName": "stackScriptUDFResponses",
+                    "jsonName": "StackScriptUDFResponses",
+                    "description": "JSON encoded name/value pairs, answering this StackScript's User Defined Fields"
+                },
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "distributionId",
+                    "jsonName": "DistributionID",
+                    "description": "Which Distribution to apply this StackScript to. Must be one from the script's DistributionIDList"
+                },
+                {
+                    "type": "java.lang.String",
+                    "javaName": "label",
+                    "jsonName": "Label",
+                    "description": "The label of this new disk image"
+                },
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "size",
+                    "jsonName": "Size",
+                    "description": "Size of this disk image in MB"
+                },
+                {
+                    "type": "java.lang.String",
+                    "javaName": "rootPass",
+                    "jsonName": "rootPass",
+                    "description": "The root user's password"
+                }
+            ],
+            "optionalParameters": [
+                {
+                    "type": "java.lang.String",
+                    "javaName": "rootSSHKey",
+                    "jsonName": "rootSSHKey",
+                    "description": "Optionally sets this string into /root/.ssh/authorized_keys upon distribution configuration."
+                }
+            ],
+            "fixedParameters": [
+                {
+                    "jsonName": "api_action",
+                    "jsonValue": "linode.disk.createfromstackscript"
+                }
+            ],
+            "url": "",
+            "description": "Creates a new disk from a previously imagized disk."
+        },
+        {
+            "methodName": "deleteLinodeDisk",
+            "mandatoryParameters": [
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "linodeId",
+                    "jsonName": "LinodeID",
+                    "description": ""
+                },
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "diskId",
+                    "jsonName": "DiskID",
+                    "description": ""
+                }
+            ],
+            "optionalParameters": [],
+            "fixedParameters": [
+                {
+                    "jsonName": "api_action",
+                    "jsonValue": "linode.disk.delete"
+                }
+            ],
+            "url": "",
+            "description": ""
+        },
+        {
+            "methodName": "duplicateLinodeDisk",
+            "mandatoryParameters": [
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "linodeId",
+                    "jsonName": "LinodeID",
+                    "description": ""
+                },
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "diskId",
+                    "jsonName": "DiskID",
+                    "description": ""
+                }
+            ],
+            "optionalParameters": [],
+            "fixedParameters": [
+                {
+                    "jsonName": "api_action",
+                    "jsonValue": "linode.disk.duplicate"
+                }
+            ],
+            "url": "",
+            "description": "Performs a bit-for-bit copy of a disk image."
+        },
+        {
+            "methodName": "imagizeLinodeDisk",
+            "mandatoryParameters": [
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "linodeId",
+                    "jsonName": "LinodeID",
+                    "description": "Specifies the source Linode to create the image from"
+                },
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "diskId",
+                    "jsonName": "DiskID",
+                    "description": "Specifies the source Disk to create the image from"
+                }
+            ],
+            "optionalParameters": [
+                {
+                    "type": "java.lang.String",
+                    "javaName": "description",
+                    "jsonName": "Description",
+                    "description": "An optional description of the created image"
+                },
+                {
+                    "type": "java.lang.String",
+                    "javaName": "label",
+                    "jsonName": "Label",
+                    "description": "Sets the name of the image shown in the base image list, defaults to the source image label"
+                }
+            ],
+            "fixedParameters": [
+                {
+                    "jsonName": "api_action",
+                    "jsonValue": "linode.disk.imagize"
+                }
+            ],
+            "url": "",
+            "description": "Creates a gold-master image for future deployments"
+        },
+        {
+            "methodName": "listLinodeDisk",
+            "mandatoryParameters": [
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "linodeId",
+                    "jsonName": "LinodeID",
+                    "description": ""
+                }
+            ],
+            "optionalParameters": [
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "diskId",
+                    "jsonName": "DiskID",
+                    "description": ""
+                }
+            ],
+            "fixedParameters": [
+                {
+                    "jsonName": "api_action",
+                    "jsonValue": "linode.disk.list"
+                }
+            ],
+            "url": "",
+            "description": "Status values are 1: Ready and 2: Being Deleted."
+        },
+        {
+            "methodName": "resizeLinodeDisk",
+            "mandatoryParameters": [
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "linodeId",
+                    "jsonName": "LinodeID",
+                    "description": ""
+                },
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "diskId",
+                    "jsonName": "DiskID",
+                    "description": ""
+                },
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "size",
+                    "jsonName": "size",
+                    "description": "The requested new size of this Disk in MB"
+                }
+            ],
+            "optionalParameters": [],
+            "fixedParameters": [
+                {
+                    "jsonName": "api_action",
+                    "jsonValue": "linode.disk.resize"
+                }
+            ],
+            "url": "",
+            "description": ""
+        },
+        {
+            "methodName": "updateLinodeDisk",
+            "mandatoryParameters": [
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "diskId",
+                    "jsonName": "DiskID",
+                    "description": ""
+                }
+            ],
+            "optionalParameters": [
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "linodeId",
+                    "jsonName": "LinodeID",
+                    "description": ""
+                },
+                {
+                    "type": "java.lang.String",
+                    "javaName": "label",
+                    "jsonName": "Label",
+                    "description": "The display label for this Disk"
+                },
+                {
+                    "type": "java.lang.Boolean",
+                    "javaName": "isReadOnly",
+                    "jsonName": "isReadOnly",
+                    "description": "Enable forced read-only for this Disk"
+                }
+            ],
+            "fixedParameters": [
+                {
+                    "jsonName": "api_action",
+                    "jsonValue": "linode.disk.update"
+                }
+            ],
+            "url": "",
+            "description": ""
+        },
+        {
+            "methodName": "addPrivateIP",
+            "mandatoryParameters": [
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "linodeId",
+                    "jsonName": "LinodeID",
+                    "description": ""
+                }
+            ],
+            "optionalParameters": [],
+            "fixedParameters": [
+                {
+                    "jsonName": "api_action",
+                    "jsonValue": "linode.ip.addprivate"
+                }
+            ],
+            "url": "",
+            "description": "Assigns a Private IP to a Linode. Returns the IPAddressID that was added."
+        },
+        {
+            "methodName": "addPublicIP",
+            "mandatoryParameters": [
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "linodeId",
+                    "jsonName": "LinodeID",
+                    "description": "The LinodeID of the Linode that will be assigned an additional public IP address"
+                }
+            ],
+            "optionalParameters": [],
+            "fixedParameters": [
+                {
+                    "jsonName": "api_action",
+                    "jsonValue": "linode.ip.addpublic"
+                }
+            ],
+            "url": "",
+            "description": "Assigns a Public IP to a Linode. Returns the IPAddressID and IPAddress that was added."
+        },
+        {
+            "methodName": "listIP",
+            "mandatoryParameters": [],
+            "optionalParameters": [
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "linodeId",
+                    "jsonName": "LinodeID",
+                    "description": "If specified, limits the result to this LinodeID"
+                },
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "ipAddressId",
+                    "jsonName": "IPAddressID",
+                    "description": "If specified, limits the result to this IPAddressID"
+                }
+            ],
+            "fixedParameters": [
+                {
+                    "jsonName": "api_action",
+                    "jsonValue": "linode.ip.list"
+                }
+            ],
+            "url": "",
+            "description": "Returns the IP addresses of all Linodes you have access to."
+        },
+        {
+            "methodName": "setRdnsIP",
+            "mandatoryParameters": [
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "ipAddressId",
+                    "jsonName": "IPAddressID",
+                    "description": "The IPAddressID of the address to update"
+                },
+                {
+                    "type": "java.lang.String",
+                    "javaName": "hostname",
+                    "jsonName": "Hostname",
+                    "description": "The hostname to set the reverse DNS to"
+                }
+            ],
+            "optionalParameters": [],
+            "fixedParameters": [
+                {
+                    "jsonName": "api_action",
+                    "jsonValue": "linode.ip.setrdns"
+                }
+            ],
+            "url": "",
+            "description": "Sets the rDNS name of a Public IP. Returns the IPAddressID and IPAddress that were updated."
+        },
+        {
+            "methodName": "swapIp",
+            "mandatoryParameters": [
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "ipAddressId",
+                    "jsonName": "IPAddressID",
+                    "description": "The IPAddressID of an IP Address to transfer or swap"
+                },
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "withIPAddressId",
+                    "jsonName": "withIPAddressID",
+                    "description": "The IP Address ID to swap"
+                }
+            ],
+            "optionalParameters": [
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "toLinodeId",
+                    "jsonName": "toLinodeID",
+                    "description": "The LinodeID of the Linode where IPAddressID will be transfered"
+                }
+            ],
+            "fixedParameters": [
+                {
+                    "jsonName": "api_action",
+                    "jsonValue": "linode.ip.swap"
+                }
+            ],
+            "url": "",
+            "description": "Exchanges Public IP addresses between two Linodes within a Datacenter. The destination of the IP Address can be designated by either the toLinodeID or withIPAddressID parameter. Returns the resulting relationship of the Linode and IP Address parameters. When performing a one directional swap, the source is represented by the first of the two resultant array members."
+        },
+        {
+            "methodName": "listJobs",
+            "mandatoryParameters": [
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "linodeId",
+                    "jsonName": "LinodeID",
+                    "description": ""
+                }
+            ],
+            "optionalParameters": [
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "jobId",
+                    "jsonName": "JobID",
+                    "description": "Limits the list to the specified JobID"
+                },
+                {
+                    "type": "java.lang.Boolean",
+                    "javaName": "pendingOnly",
+                    "jsonName": "pendingOnly",
+                    "description": ""
+                }
+            ],
+            "fixedParameters": [
+                {
+                    "jsonName": "api_action",
+                    "jsonValue": "linode.job.list"
+                }
+            ],
+            "url": "",
+            "description": ""
+        },
+        {
+            "methodName": "createNodeBalancer",
+            "mandatoryParameters": [
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "datacenterId",
+                    "jsonName": "DatacenterID",
+                    "description": "The DatacenterID from avail.datacenters() where you wish to place this new NodeBalancer"
+                }
+            ],
+            "optionalParameters": [
+                {
+                    "type": "java.lang.String",
+                    "javaName": "label",
+                    "jsonName": "Label",
+                    "description": "This NodeBalancer's label"
+                },
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "clientConnThrottle",
+                    "jsonName": "ClientConnThrottle",
+                    "description": "To help mitigate abuse, throttle connections per second, per client IP. 0 to disable. Max of 20."
+                }
+            ],
+            "fixedParameters": [
+                {
+                    "jsonName": "api_action",
+                    "jsonValue": "nodebalancer.create"
+                }
+            ],
+            "url": "",
+            "description": ""
+        },
+        {
+            "methodName": "deleteNodeBalancer",
+            "mandatoryParameters": [
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "datacenterId",
+                    "jsonName": "DatacenterID",
+                    "description": "The NodeBalancerID to delete"
+                }
+            ],
+            "optionalParameters": [],
+            "fixedParameters": [
+                {
+                    "jsonName": "api_action",
+                    "jsonValue": "nodebalancer.delete"
+                }
+            ],
+            "url": "",
+            "description": "Immediately removes a NodeBalancer from your account and issues a pro-rated credit back to your account, if applicable."
+        },
+        {
+            "methodName": "listNodeBalancers",
+            "mandatoryParameters": [],
+            "optionalParameters": [
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "nodeBalancerId",
+                    "jsonName": "NodeBalancerID",
+                    "description": "Limits the list to the specified NodeBalancerID"
+                }
+            ],
+            "fixedParameters": [
+                {
+                    "jsonName": "api_action",
+                    "jsonValue": "nodebalancer.list"
+                }
+            ],
+            "url": "",
+            "description": "Returns a list of NodeBalancers this user has access or delete to, including their properties"
+        },
+        {
+            "methodName": "updateNodeBalancer",
+            "mandatoryParameters": [
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "nodeBalancerId",
+                    "jsonName": "NodeBalancerID",
+                    "description": ""
+                }
+            ],
+            "optionalParameters": [
+                {
+                    "type": "java.lang.String",
+                    "javaName": "label",
+                    "jsonName": "Label",
+                    "description": "This NodeBalancer's label"
+                },
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "clientConnThrottle",
+                    "jsonName": "ClientConnThrottle",
+                    "description": "To help mitigate abuse, throttle connections per second, per client IP. 0 to disable. Max of 20."
+                }
+            ],
+            "fixedParameters": [
+                {
+                    "jsonName": "api_action",
+                    "jsonValue": "nodebalancer.update"
+                }
+            ],
+            "url": "",
+            "description": "Updates a NodeBalancer's properties"
+        },
+        {
+            "methodName": "createNodeBalancerConfig",
+            "mandatoryParameters": [
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "nodeBalancerId",
+                    "jsonName": "NodeBalancerID",
+                    "description": "The parent NodeBalancer's ID"
+                }
+            ],
+            "optionalParameters": [
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "port",
+                    "jsonName": "Port",
+                    "description": "Port to bind to on the public interfaces. 1-65534"
+                },
+                {
+                    "type": "java.lang.String",
+                    "javaName": "protocol",
+                    "jsonName": "Protocol",
+                    "description": "Either 'tcp', 'http', or 'https'"
+                },
+                {
+                    "type": "java.lang.String",
+                    "javaName": "algorithm",
+                    "jsonName": "Algorithm",
+                    "description": "Balancing algorithm. One of 'roundrobin', 'leastconn', 'source'"
+                },
+                {
+                    "type": "java.lang.String",
+                    "javaName": "stickiness",
+                    "jsonName": "Stickiness",
+                    "description": "Session persistence. One of 'none', 'table', 'http_cookie'"
+                },
+                {
+                    "type": "java.lang.String",
+                    "javaName": "check",
+                    "jsonName": "check",
+                    "description": "Perform active health checks on the backend nodes. One of 'connection', 'http', 'http_body'"
+                },
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "checkInterval",
+                    "jsonName": "check_interval",
+                    "description": "Seconds between health check probes. 2-3600"
+                },
+                {
+                    "type": "java.lang.String",
+                    "javaName": "checkTimeout",
+                    "jsonName": "check_timeout",
+                    "description": "Seconds to wait before considering the probe a failure. 1-30. Must be less than check_interval."
+                },
+                {
+                    "type": "java.lang.String",
+                    "javaName": "checkAttempts",
+                    "jsonName": "check_attempts",
+                    "description": "Number of failed probes before taking a node out of rotation. 1-30"
+                },
+                {
+                    "type": "java.lang.String",
+                    "javaName": "checkPath",
+                    "jsonName": "check_path",
+                    "description": "When check=http, the path to request"
+                },
+                {
+                    "type": "java.lang.String",
+                    "javaName": "checkBody",
+                    "jsonName": "check_body",
+                    "description": "When check=http_body, a regex against the expected result body"
+                },
+                {
+                    "type": "java.lang.String",
+                    "javaName": "sslCert",
+                    "jsonName": "ssl_cert",
+                    "description": "SSL certificate served by the NodeBalancer when the protocol is 'https'"
+                },
+                {
+                    "type": "java.lang.String",
+                    "javaName": "sslKey",
+                    "jsonName": "ssl_key",
+                    "description": "Unpassphrased private key for the SSL certificate when protocol is 'https'"
+                }
+            ],
+            "fixedParameters": [
+                {
+                    "jsonName": "api_action",
+                    "jsonValue": "nodebalancer.config.create"
+                }
+            ],
+            "url": "",
+            "description": "Updates a NodeBalancer's properties"
+        },
+        {
+            "methodName": "deleteNodeBalancerConfig",
+            "mandatoryParameters": [
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "nodeBalancerId",
+                    "jsonName": "NodeBalancerID",
+                    "description": ""
+                },
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "configId",
+                    "jsonName": "ConfigID",
+                    "description": "The ConfigID to delete"
+                }
+            ],
+            "optionalParameters": [],
+            "fixedParameters": [
+                {
+                    "jsonName": "api_action",
+                    "jsonValue": "nodebalancer.config.delete"
+                }
+            ],
+            "url": "",
+            "description": "Deletes a NodeBalancer's Config"
+        },
+        {
+            "methodName": "listNodeBalancerConfig",
+            "mandatoryParameters": [
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "nodeBalancerId",
+                    "jsonName": "NodeBalancerID",
+                    "description": ""
+                }
+            ],
+            "optionalParameters": [
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "configId",
+                    "jsonName": "ConfigID",
+                    "description": "Limits the list to the specified ConfigID"
+                }
+            ],
+            "fixedParameters": [
+                {
+                    "jsonName": "api_action",
+                    "jsonValue": "nodebalancer.config.list"
+                }
+            ],
+            "url": "",
+            "description": "Returns a list of NodeBalancers this user has access or delete to, including their properties"
+        },
+        {
+            "methodName": "updateNodeBalancerConfig",
+            "mandatoryParameters": [
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "configId",
+                    "jsonName": "ConfigID",
+                    "description": ""
+                }
+            ],
+            "optionalParameters": [
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "port",
+                    "jsonName": "Port",
+                    "description": "Port to bind to on the public interfaces. 1-65534"
+                },
+                {
+                    "type": "java.lang.String",
+                    "javaName": "protocol",
+                    "jsonName": "Protocol",
+                    "description": "Either 'tcp', 'http', or 'https'"
+                },
+                {
+                    "type": "java.lang.String",
+                    "javaName": "algorithm",
+                    "jsonName": "Algorithm",
+                    "description": "Balancing algorithm. One of 'roundrobin', 'leastconn', 'source'"
+                },
+                {
+                    "type": "java.lang.String",
+                    "javaName": "stickiness",
+                    "jsonName": "Stickiness",
+                    "description": "Session persistence. One of 'none', 'table', 'http_cookie'"
+                },
+                {
+                    "type": "java.lang.String",
+                    "javaName": "check",
+                    "jsonName": "check",
+                    "description": "Perform active health checks on the backend nodes. One of 'connection', 'http', 'http_body'"
+                },
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "checkInterval",
+                    "jsonName": "check_interval",
+                    "description": "Seconds between health check probes. 2-3600"
+                },
+                {
+                    "type": "java.lang.String",
+                    "javaName": "checkTimeout",
+                    "jsonName": "check_timeout",
+                    "description": "Seconds to wait before considering the probe a failure. 1-30. Must be less than check_interval."
+                },
+                {
+                    "type": "java.lang.String",
+                    "javaName": "checkAttempts",
+                    "jsonName": "check_attempts",
+                    "description": "Number of failed probes before taking a node out of rotation. 1-30"
+                },
+                {
+                    "type": "java.lang.String",
+                    "javaName": "checkPath",
+                    "jsonName": "check_path",
+                    "description": "When check=http, the path to request"
+                },
+                {
+                    "type": "java.lang.String",
+                    "javaName": "checkBody",
+                    "jsonName": "check_body",
+                    "description": "When check=http_body, a regex against the expected result body"
+                },
+                {
+                    "type": "java.lang.String",
+                    "javaName": "sslCert",
+                    "jsonName": "ssl_cert",
+                    "description": "SSL certificate served by the NodeBalancer when the protocol is 'https'"
+                },
+                {
+                    "type": "java.lang.String",
+                    "javaName": "sslKey",
+                    "jsonName": "ssl_key",
+                    "description": "Unpassphrased private key for the SSL certificate when protocol is 'https'"
+                }
+            ],
+            "fixedParameters": [
+                {
+                    "jsonName": "api_action",
+                    "jsonValue": "nodebalancer.config.update"
+                }
+            ],
+            "url": "",
+            "description": "Updates a Config's properties"
+        },
+        {
+            "methodName": "createNodeBalancerNode",
+            "mandatoryParameters": [
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "configId",
+                    "jsonName": "ConfigID",
+                    "description": "The parent ConfigID to attach this Node to"
+                },
+                {
+                    "type": "java.lang.String",
+                    "javaName": "label",
+                    "jsonName": "Label",
+                    "description": "This backend Node's label"
+                },
+                {
+                    "type": "java.lang.String",
+                    "javaName": "address",
+                    "jsonName": "Address",
+                    "description": "The address:port combination used to communicate with this Node"
+                }
+            ],
+            "optionalParameters": [
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "weight",
+                    "jsonName": "Weight",
+                    "description": "Load balancing weight, 1-255. Higher means more connections."
+                },
+                {
+                    "type": "java.lang.String",
+                    "javaName": "mode",
+                    "jsonName": "Mode",
+                    "description": "The connections mode for this node. One of 'accept', 'reject', or 'drain'"
+                }
+            ],
+            "fixedParameters": [
+                {
+                    "jsonName": "api_action",
+                    "jsonValue": "nodebalancer.node.create"
+                }
+            ],
+            "url": "",
+            "description": "Returns a list of NodeBalancers this user has access or delete to, including their properties"
+        },
+        {
+            "methodName": "deleteNodeBalancerNode",
+            "mandatoryParameters": [
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "nodeId",
+                    "jsonName": "NodeID",
+                    "description": "The NodeID to delete"
+                }
+            ],
+            "optionalParameters": [],
+            "fixedParameters": [
+                {
+                    "jsonName": "api_action",
+                    "jsonValue": "nodebalancer.node.delete"
+                }
+            ],
+            "url": "",
+            "description": "Deletes a Node from a NodeBalancer Config"
+        },
+        {
+            "methodName": "listNodeBalancerNodes",
+            "mandatoryParameters": [
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "configId",
+                    "jsonName": "ConfigID",
+                    "description": ""
+                }
+            ],
+            "optionalParameters": [
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "nodeId",
+                    "jsonName": "NodeID",
+                    "description": "Limits the list to the specified NodeID"
+                }
+            ],
+            "fixedParameters": [
+                {
+                    "jsonName": "api_action",
+                    "jsonValue": "nodebalancer.node.list"
+                }
+            ],
+            "url": "",
+            "description": "Returns a list of Nodes associated with a NodeBalancer Config"
+        },
+        {
+            "methodName": "updateNodeBalancerNode",
+            "mandatoryParameters": [
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "nodeId",
+                    "jsonName": "NodeID",
+                    "description": ""
+                }
+            ],
+            "optionalParameters": [
+                {
+                    "type": "java.lang.String",
+                    "javaName": "label",
+                    "jsonName": "Label",
+                    "description": "This backend Node's label"
+                },
+                {
+                    "type": "java.lang.String",
+                    "javaName": "address",
+                    "jsonName": "Address",
+                    "description": "The address:port combination used to communicate with this Node"
+                },
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "weight",
+                    "jsonName": "Weight",
+                    "description": "Load balancing weight, 1-255. Higher means more connections."
+                },
+                {
+                    "type": "java.lang.String",
+                    "javaName": "mode",
+                    "jsonName": "Mode",
+                    "description": "The connections mode for this node. One of 'accept', 'reject', or 'drain'"
+                }
+            ],
+            "fixedParameters": [
+                {
+                    "jsonName": "api_action",
+                    "jsonValue": "nodebalancer.node.update"
+                }
+            ],
+            "url": "",
+            "description": "Updates a Node's properties"
+        },
+        {
+            "methodName": "createStackScript",
+            "mandatoryParameters": [
+                {
+                    "type": "java.lang.String",
+                    "javaName": "label",
+                    "jsonName": "Label",
+                    "description": "The Label for this StackScript"
+                },
+                {
+                    "type": "java.lang.String",
+                    "javaName": "distributionIDList",
+                    "jsonName": "DistributionIDList",
+                    "description": "Comma delimited list of DistributionIDs that this script works on"
+                },
+                {
+                    "type": "java.lang.String",
+                    "javaName": "script",
+                    "jsonName": "script",
+                    "description": "The actual script"
+                }
+            ],
+            "optionalParameters": [
+                {
+                    "type": "java.lang.String",
+                    "javaName": "description",
+                    "jsonName": "Description",
+                    "description": ""
+                },
+                {
+                    "type": "java.lang.Boolean",
+                    "javaName": "isPublic",
+                    "jsonName": "isPublic",
+                    "description": "Whether this StackScript is published in the Library, for everyone to use"
+                },
+                {
+                    "type": "java.lang.String",
+                    "javaName": "revNote",
+                    "jsonName": "rev_note",
+                    "description": ""
+                }
+            ],
+            "fixedParameters": [
+                {
+                    "jsonName": "api_action",
+                    "jsonValue": "stackscript.create"
+                }
+            ],
+            "url": "",
+            "description": "Create a StackScript."
+        },
+        {
+            "methodName": "deleteStackScript",
+            "mandatoryParameters": [
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "stackScriptID",
+                    "jsonName": "StackScriptID",
+                    "description": ""
+                }
+            ],
+            "optionalParameters": [],
+            "fixedParameters": [
+                {
+                    "jsonName": "api_action",
+                    "jsonValue": "stackscript.delete"
+                }
+            ],
+            "url": "",
+            "description": ""
+        },
+        {
+            "methodName": "listStackScripts",
+            "mandatoryParameters": [],
+            "optionalParameters": [
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "stackScriptID",
+                    "jsonName": "StackScriptID",
+                    "description": "Limits the list to the specified StackScriptID"
+                }
+            ],
+            "fixedParameters": [
+                {
+                    "jsonName": "api_action",
+                    "jsonValue": "stackscript.list"
+                }
+            ],
+            "url": "",
+            "description": "Lists StackScripts you have access to."
+        },
+        {
+            "methodName": "updateStackScript",
+            "mandatoryParameters": [
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "stackScriptId",
+                    "jsonName": "StackScriptID",
+                    "description": ""
+                }
+            ],
+            "optionalParameters": [
+                {
+                    "type": "java.lang.String",
+                    "javaName": "label",
+                    "jsonName": "Label",
+                    "description": "The Label for this StackScript"
+                },
+                {
+                    "type": "java.lang.String",
+                    "javaName": "description",
+                    "jsonName": "Description",
+                    "description": ""
+                },
+                {
+                    "type": "java.lang.String",
+                    "javaName": "distributionIdList",
+                    "jsonName": "DistributionIDList",
+                    "description": "Comma delimited list of DistributionIDs that this script works on"
+                },
+                {
+                    "type": "java.lang.Boolean",
+                    "javaName": "isPublic",
+                    "jsonName": "isPublic",
+                    "description": "Whether this StackScript is published in the Library, for everyone to use"
+                },
+                {
+                    "type": "java.lang.String",
+                    "javaName": "revNote",
+                    "jsonName": "rev_note",
+                    "description": ""
+                },
+                {
+                    "type": "java.lang.String",
+                    "javaName": "script",
+                    "jsonName": "script",
+                    "description": "The actual script"
+                }
+            ],
+            "fixedParameters": [
+                {
+                    "jsonName": "api_action",
+                    "jsonValue": "stackscript.update"
+                }
+            ],
+            "url": "",
+            "description": "Update a StackScript."
+        },
+        {
+            "methodName": "deleteImage",
+            "mandatoryParameters": [
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "imageId",
+                    "jsonName": "ImageID",
+                    "description": "The ID of the gold-master image to delete"
+                }
+            ],
+            "optionalParameters": [],
+            "fixedParameters": [
+                {
+                    "jsonName": "api_action",
+                    "jsonValue": "image.delete"
+                }
+            ],
+            "url": "",
+            "description": "Deletes a gold-master image"
+        },
+        {
+            "methodName": "listImages",
+            "mandatoryParameters": [],
+            "optionalParameters": [
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "pending",
+                    "jsonName": "pending",
+                    "description": "Show images currently being created."
+                },
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "imageId",
+                    "jsonName": "ImageID",
+                    "description": "Request information for a specific gold-master image"
+                }
+            ],
+            "fixedParameters": [
+                {
+                    "jsonName": "api_action",
+                    "jsonValue": "image.list"
+                }
+            ],
+            "url": "",
+            "description": "Lists available gold-master images"
+        },
+        {
+            "methodName": "updateImage",
+            "mandatoryParameters": [
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "imageId",
+                    "jsonName": "ImageID",
+                    "description": "The ID of the Image to modify."
+                }
+            ],
+            "optionalParameters": [
+                {
+                    "type": "java.lang.String",
+                    "javaName": "label",
+                    "jsonName": "label",
+                    "description": "The label of the Image."
+                },
+                {
+                    "type": "java.lang.String",
+                    "javaName": "description",
+                    "jsonName": "description",
+                    "description": "An optional description of the Image."
+                }
+            ],
+            "fixedParameters": [
+                {
+                    "jsonName": "api_action",
+                    "jsonValue": "image.update"
+                }
+            ],
+            "url": "",
+            "description": "Update an Image record."
+        },
+        {
+            "methodName": "createDomain",
+            "mandatoryParameters": [
+                {
+                    "type": "java.lang.String",
+                    "javaName": "domain",
+                    "jsonName": "Domain",
+                    "description": "The zone's name"
+                },
+                {
+                    "type": "java.lang.String",
+                    "javaName": "type",
+                    "jsonName": "Type",
+                    "description": "master or slave"
+                }
+            ],
+            "optionalParameters": [
+                {
+                    "type": "java.lang.String",
+                    "javaName": "description",
+                    "jsonName": "Description",
+                    "description": "Currently undisplayed."
+                },
+                {
+                    "type": "java.lang.String",
+                    "javaName": "soaEmail",
+                    "jsonName": "SOA_Email",
+                    "description": "Required when type=master"
+                },
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "refreshSec",
+                    "jsonName": "Refresh_sec",
+                    "description": ""
+                },
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "retrySec",
+                    "jsonName": "Retry_sec",
+                    "description": ""
+                },
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "expireSec",
+                    "jsonName": "Expire_sec",
+                    "description": ""
+                },
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "ttlSec",
+                    "jsonName": "TTL_sec",
+                    "description": ""
+                },
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "lpmDisplayGroup",
+                    "jsonName": "lpm_displayGroup",
+                    "description": "Display group in the Domain list inside the Linode DNS Manager"
+                },
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "status",
+                    "jsonName": "status",
+                    "description": "0, 1, or 2 (disabled, active, edit mode)"
+                },
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "masterIps",
+                    "jsonName": "master_ips",
+                    "description": "When type=slave, the zone's master DNS servers list, semicolon separated"
+                },
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "axfrIps",
+                    "jsonName": "axfr_ips",
+                    "description": "IP addresses allowed to AXFR the entire zone, semicolon separated"
+                }
+            ],
+            "fixedParameters": [
+                {
+                    "jsonName": "api_action",
+                    "jsonValue": "domain.create"
+                }
+            ],
+            "url": "",
+            "description": "Create a domain record."
+        },
+        {
+            "methodName": "deleteDomain",
+            "mandatoryParameters": [
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "domainId",
+                    "jsonName": "DomainID",
+                    "description": ""
+                }
+            ],
+            "optionalParameters": [],
+            "fixedParameters": [
+                {
+                    "jsonName": "api_action",
+                    "jsonValue": "domain.delete"
+                }
+            ],
+            "url": "",
+            "description": ""
+        },
+        {
+            "methodName": "listDomains",
+            "mandatoryParameters": [],
+            "optionalParameters": [
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "domainId",
+                    "jsonName": "DomainID",
+                    "description": "Limits the list to the specified DomainID"
+                }
+            ],
+            "fixedParameters": [
+                {
+                    "jsonName": "api_action",
+                    "jsonValue": "domain.list"
+                }
+            ],
+            "url": "",
+            "description": "Lists domains you have access to."
+        },
+        {
+            "methodName": "updateDomain",
+            "mandatoryParameters": [
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "domainId",
+                    "jsonName": "DomainID",
+                    "description": ""
+                }
+            ],
+            "optionalParameters": [
+                {
+                    "type": "java.lang.String",
+                    "javaName": "domain",
+                    "jsonName": "Domain",
+                    "description": "The zone's name"
+                },
+                {
+                    "type": "java.lang.String",
+                    "javaName": "description",
+                    "jsonName": "Description",
+                    "description": "Currently undisplayed."
+                },
+                {
+                    "type": "java.lang.String",
+                    "javaName": "type",
+                    "jsonName": "Type",
+                    "description": "master or slave"
+                },
+                {
+                    "type": "java.lang.String",
+                    "javaName": "soaEmail",
+                    "jsonName": "SOA_Email",
+                    "description": "Required when type=master"
+                },
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "refreshSec",
+                    "jsonName": "Refresh_sec",
+                    "description": ""
+                },
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "retrySec",
+                    "jsonName": "Retry_sec",
+                    "description": ""
+                },
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "expireSec",
+                    "jsonName": "Expire_sec",
+                    "description": ""
+                },
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "ttlSec",
+                    "jsonName": "TTL_sec",
+                    "description": ""
+                },
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "lpmDisplayGroup",
+                    "jsonName": "lpm_displayGroup",
+                    "description": "Display group in the Domain list inside the Linode DNS Manager"
+                },
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "status",
+                    "jsonName": "status",
+                    "description": "0, 1, or 2 (disabled, active, edit mode)"
+                },
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "masterIps",
+                    "jsonName": "master_ips",
+                    "description": "When type=slave, the zone's master DNS servers list, semicolon separated"
+                },
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "axfrIps",
+                    "jsonName": "axfr_ips",
+                    "description": "IP addresses allowed to AXFR the entire zone, semicolon separated"
+                }
+            ],
+            "fixedParameters": [
+                {
+                    "jsonName": "api_action",
+                    "jsonValue": "domain.update"
+                }
+            ],
+            "url": "",
+            "description": "Update a domain record."
+        },
+        {
+            "methodName": "createDomainResource",
+            "mandatoryParameters": [
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "domainId",
+                    "jsonName": "DomainID",
+                    "description": ""
+                },
+                {
+                    "type": "java.lang.String",
+                    "javaName": "type",
+                    "jsonName": "Type",
+                    "description": "One of: NS, MX, A, AAAA, CNAME, TXT, or SRV"
+                }
+            ],
+            "optionalParameters": [
+                {
+                    "type": "java.lang.String",
+                    "javaName": "name",
+                    "jsonName": "Name",
+                    "description": "The hostname or FQDN. When Type=MX the subdomain to delegate to the Target MX server."
+                },
+                {
+                    "type": "java.lang.String",
+                    "javaName": "target",
+                    "jsonName": "Target",
+                    "description": "When Type=MX the hostname. When Type=CNAME the target of the alias. When Type=TXT the value of the record. When Type=A or AAAA the token of '[remote_addr]' will be substituted with the IP address of the request."
+                },
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "priority",
+                    "jsonName": "Priority",
+                    "description": "Priority for MX and SRV records, 0-255"
+                },
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "weight",
+                    "jsonName": "Weight",
+                    "description": ""
+                },
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "port",
+                    "jsonName": "Port",
+                    "description": ""
+                },
+                {
+                    "type": "java.lang.String",
+                    "javaName": "protocol",
+                    "jsonName": "Protocol",
+                    "description": "The protocol to append to an SRV record. Ignored on other record types."
+                },
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "ttlSec",
+                    "jsonName": "TTL_sec",
+                    "description": "TTL. Leave as 0 to accept our default."
+                }
+            ],
+            "fixedParameters": [
+                {
+                    "jsonName": "api_action",
+                    "jsonValue": "domain.resource.create"
+                }
+            ],
+            "url": "",
+            "description": "Create a domain record."
+        },
+        {
+            "methodName": "deleteDomainResource",
+            "mandatoryParameters": [
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "domainId",
+                    "jsonName": "DomainID",
+                    "description": ""
+                },
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "resourceId",
+                    "jsonName": "ResourceId",
+                    "description": ""
+                }
+            ],
+            "optionalParameters": [],
+            "fixedParameters": [
+                {
+                    "jsonName": "api_action",
+                    "jsonValue": "domain.resource.delete"
+                }
+            ],
+            "url": "",
+            "description": ""
+        },
+        {
+            "methodName": "listDomainResources",
+            "mandatoryParameters": [
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "domainId",
+                    "jsonName": "DomainID",
+                    "description": ""
+                }
+            ],
+            "optionalParameters": [
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "resourceId",
+                    "jsonName": "ResourceId",
+                    "description": ""
+                }
+            ],
+            "fixedParameters": [
+                {
+                    "jsonName": "api_action",
+                    "jsonValue": "domain.resource.list"
+                }
+            ],
+            "url": "",
+            "description": ""
+        },
+        {
+            "methodName": "updateDomainResource",
+            "mandatoryParameters": [
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "resourceId",
+                    "jsonName": "ResourceId",
+                    "description": ""
+                }
+            ],
+            "optionalParameters": [
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "domainId",
+                    "jsonName": "DomainID",
+                    "description": ""
+                },
+                {
+                    "type": "java.lang.String",
+                    "javaName": "name",
+                    "jsonName": "Name",
+                    "description": "The hostname or FQDN. When Type=MX the subdomain to delegate to the Target MX server."
+                },
+                {
+                    "type": "java.lang.String",
+                    "javaName": "target",
+                    "jsonName": "Target",
+                    "description": "When Type=MX the hostname. When Type=CNAME the target of the alias. When Type=TXT the value of the record. When Type=A or AAAA the token of '[remote_addr]' will be substituted with the IP address of the request."
+                },
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "priority",
+                    "jsonName": "Priority",
+                    "description": "Priority for MX and SRV records, 0-255"
+                },
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "weight",
+                    "jsonName": "Weight",
+                    "description": ""
+                },
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "port",
+                    "jsonName": "Port",
+                    "description": ""
+                },
+                {
+                    "type": "java.lang.String",
+                    "javaName": "protocol",
+                    "jsonName": "Protocol",
+                    "description": "The protocol to append to an SRV record. Ignored on other record types."
+                },
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "ttlSec",
+                    "jsonName": "TTL_sec",
+                    "description": "TTL. Leave as 0 to accept our default."
+                }
+            ],
+            "fixedParameters": [
+                {
+                    "jsonName": "api_action",
+                    "jsonValue": "domain.resource.update"
+                }
+            ],
+            "url": "",
+            "description": "Update a domain record."
+        },
+        {
+            "methodName": "estimateAccountInvoice",
+            "mandatoryParameters": [
+                {
+                    "type": "java.lang.String",
+                    "javaName": "mode",
+                    "jsonName": "mode",
+                    "description": "This is one of the following options: 'linode_new', 'linode_resize', or 'nodebalancer_new'."
+                }
+            ],
+            "optionalParameters": [
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "paymentTerm",
+                    "jsonName": "PaymentTerm",
+                    "description": "Subscription term in months. One of: 1, 12, or 24. This is required for modes 'linode_new' and 'nodebalancer_new'."
+                },
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "planId",
+                    "jsonName": "PlanID",
+                    "description": "The desired PlanID available from avail.LinodePlans(). This is required for modes 'linode_new' and 'linode_resize'."
+                },
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "linodeId",
+                    "jsonName": "LinodeID",
+                    "description": "This is the LinodeID you want to resize and is required for mode 'linode_resize'."
+                }
+            ],
+            "fixedParameters": [
+                {
+                    "jsonName": "api_action",
+                    "jsonValue": "account.estimateinvoice"
+                }
+            ],
+            "url": "",
+            "description": "Estimates the invoice for adding a new Linode or NodeBalancer as well as resizing a Linode. This returns two fields: PRICE which is the estimated cost of the invoice, and INVOICE_TO which is the date invoice would be though with timezone set to America/New_York"
+        },
+        {
+            "methodName": "accountInfo",
+            "mandatoryParameters": [],
+            "optionalParameters": [],
+            "fixedParameters": [
+                {
+                    "jsonName": "api_action",
+                    "jsonValue": "account.info"
+                }
+            ],
+            "url": "",
+            "description": "Shows information about your account such as the date your account was opened as well as your network utilization for the current month in gigabytes."
+        },
+        {
+            "methodName": "getApiKey",
+            "mandatoryParameters": [
+                {
+                    "type": "java.lang.String",
+                    "javaName": "username",
+                    "jsonName": "username",
+                    "description": ""
+                },
+                {
+                    "type": "java.lang.String",
+                    "javaName": "password",
+                    "jsonName": "password",
+                    "description": ""
+                }
+            ],
+            "optionalParameters": [
+                {
+                    "type": "java.lang.String",
+                    "javaName": "token",
+                    "jsonName": "token",
+                    "description": "Required when two-factor authentication is enabled."
+                },
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "expires",
+                    "jsonName": "expires",
+                    "description": "Number of hours the key will remain valid, between 0 and 8760. 0 means no expiration. Defaults to 168."
+                },
+                {
+                    "type": "java.lang.String",
+                    "javaName": "label",
+                    "jsonName": "label",
+                    "description": "An optional label for this key."
+                }
+            ],
+            "fixedParameters": [
+                {
+                    "jsonName": "api_action",
+                    "jsonValue": "user.getapikey"
+                }
+            ],
+            "url": "",
+            "description": "Authenticates a Linode Manager user against their username, password, and two-factor token (when enabled), and then returns a new API key, which can be used until it expires. The number of active keys is limited to 20."
+        },
+        {
+            "methodName": "apiSpec",
+            "mandatoryParameters": [],
+            "optionalParameters": [],
+            "fixedParameters": [
+                {
+                    "jsonName": "api_action",
+                    "jsonValue": "api.spec"
+                }
+            ],
+            "url": "",
+            "description": "Returns a data structure of the entire Linode API specification. This method does not require authorization."
+        },
+        {
+            "methodName": "availableDataCenters",
+            "mandatoryParameters": [],
+            "optionalParameters": [],
+            "fixedParameters": [
+                {
+                    "jsonName": "api_action",
+                    "jsonValue": "avail.datacenters"
+                }
+            ],
+            "url": "",
+            "description": "Returns a list of Linode data center facilities."
+        },
+        {
+            "methodName": "availableDistributions",
+            "mandatoryParameters": [],
+            "optionalParameters": [
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "distributionId",
+                    "jsonName": "DistributionID",
+                    "description": "Limits the results to the specified DistributionID"
+                }
+            ],
+            "fixedParameters": [
+                {
+                    "jsonName": "api_action",
+                    "jsonValue": "avail.distributions"
+                }
+            ],
+            "url": "",
+            "description": "Returns a list of available Linux Distributions."
+        },
+        {
+            "methodName": "availableKernels",
+            "mandatoryParameters": [],
+            "optionalParameters": [
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "kernelId",
+                    "jsonName": "KernelID",
+                    "description": ""
+                },
+                {
+                    "type": "java.lang.Boolean",
+                    "javaName": "isXen",
+                    "jsonName": "isXen",
+                    "description": "Limits the results to show only Xen kernels"
+                }
+            ],
+            "fixedParameters": [
+                {
+                    "jsonName": "api_action",
+                    "jsonValue": "avail.kernels"
+                }
+            ],
+            "url": "",
+            "description": "List available kernels."
+        },
+        {
+            "methodName": "availableLinodePlans",
+            "mandatoryParameters": [],
+            "optionalParameters": [
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "planId",
+                    "jsonName": "PlanID",
+                    "description": "Limits the list to the specified PlanID"
+                }
+            ],
+            "fixedParameters": [
+                {
+                    "jsonName": "api_action",
+                    "jsonValue": "avail.linodeplans"
+                }
+            ],
+            "url": "",
+            "description": "Returns a structure of Linode PlanIDs containing the Plan label and the availability in each Datacenter."
+        },
+        {
+            "methodName": "availableNodeBalancers",
+            "mandatoryParameters": [],
+            "optionalParameters": [],
+            "fixedParameters": [
+                {
+                    "jsonName": "api_action",
+                    "jsonValue": "avail.nodebalancers"
+                }
+            ],
+            "url": "",
+            "description": "Returns NodeBalancer pricing information."
+        },
+        {
+            "methodName": "availableStackScripts",
+            "mandatoryParameters": [],
+            "optionalParameters": [
+                {
+                    "type": "java.lang.Integer",
+                    "javaName": "distributionId",
+                    "jsonName": "DistributionID",
+                    "description": "Limit the results to StackScripts that can be applied to this DistributionID"
+                },
+                {
+                    "type": "java.lang.String",
+                    "javaName": "distributionVendor",
+                    "jsonName": "DistributionVendor",
+                    "description": "Debian, Ubuntu, Fedora, etc."
+                },
+                {
+                    "type": "java.lang.String",
+                    "javaName": "keywords",
+                    "jsonName": "keywords",
+                    "description": "Search terms"
+                }
+            ],
+            "fixedParameters": [
+                {
+                    "jsonName": "api_action",
+                    "jsonValue": "avail.stackscripts"
+                }
+            ],
+            "url": "",
+            "description": "Returns a list of available public StackScripts."
+        }
+    ]
 }
