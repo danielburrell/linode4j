@@ -24,7 +24,7 @@ Java implementation of the Linode API
 
 ```java
 LinodeTemplate template = new LinodeTemplate("API_KEY");
-List<DataCenter> dataCenters = template.getDataCenters();
+List<DataCenter> dataCenters = template.getDataCenters().asObject;
 ```
 
 ##Legal
