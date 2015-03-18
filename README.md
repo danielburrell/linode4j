@@ -5,11 +5,11 @@ Java implementation of the Linode API
 
 
 ##Features
- - Clean, simple data access layer and data objects
- - Access to underlying API data for ultimate control
+ - Clean, simple data access layer and data objects.
+ - Easily distinguish between required and optional parameters.
  - Threadsafe Spring-like template-based data access objects.
  - Ultra fast serialisation via Jackson.
- - Simplified access to the most common api requests.
+ - Simplified access to all linode api methods.
 
 ##Quickstart
 
