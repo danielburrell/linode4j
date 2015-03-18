@@ -22,9 +22,21 @@ Java implementation of the Linode API
 </dependency>
 ```
 
+Get a string response from the server
 ```java
 Linode api = new Linode(API_KEY);
-api.updateDomain(4).withDescription("someDescription").withMasterIps("82.12.53.123");
+String reply = api.updateDomain(4).withDescription("someDescription").withMasterIps("82.12.53.123").asString();
+```
+Or as json
+```java
+Linode api = new Linode(API_KEY);
+JsonNode reply = api.updateDomain(4).withDescription("someDescription").withMasterIps("82.12.53.123").asJson();
+```
+
+Or (coming soon) as a nicely typed object
+```java
+Linode api = new Linode(API_KEY);
+DomainUpdateReply reply = api.updateDomain(4).withDescription("someDescription").withMasterIps("82.12.53.123").asObject();
 ```
 
 ##Legal
