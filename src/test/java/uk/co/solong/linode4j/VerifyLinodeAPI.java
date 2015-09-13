@@ -2,17 +2,12 @@ package uk.co.solong.linode4j;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map.Entry;
 
 import org.junit.Assert;
 import org.junit.Test;
 
-import uk.co.solong.linode4j.Linode;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
