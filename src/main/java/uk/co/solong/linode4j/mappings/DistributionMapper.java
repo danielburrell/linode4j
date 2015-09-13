@@ -13,7 +13,8 @@ public class DistributionMapper {
                 return map.get("DISTRIBUTIONID").asInt();
             }
         }
-        throw new UnknownMapping("Unknown datacenter abbr " + os);
+        throw new UnknownMapping("Unknown OS " + os);
+
     }
 
     public DistributionMapper(JsonNode context) {
