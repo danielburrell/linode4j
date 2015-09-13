@@ -839,7 +839,7 @@
                     "description": "The StackScript to create this image from"
                 },
                 {
-                    "type": "java.lang.String",
+                    "type": "com.fasterxml.jackson.databind.JsonNode",
                     "javaName": "stackScriptUDFResponses",
                     "jsonName": "StackScriptUDFResponses",
                     "description": "JSON encoded name/value pairs, answering this StackScript's User Defined Fields"
@@ -1716,6 +1716,7 @@
             "description": "Updates a Node's properties"
         },
         {
+            "methodType":"POST",
             "methodName": "createStackScript",
             "mandatoryParameters": [
                 {
@@ -1731,6 +1732,7 @@
                     "description": "Comma delimited list of DistributionIDs that this script works on"
                 },
                 {
+                    "isPostParam":true,
                     "type": "java.lang.String",
                     "javaName": "script",
                     "jsonName": "script",
