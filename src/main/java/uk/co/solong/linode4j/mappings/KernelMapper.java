@@ -16,6 +16,23 @@ public class KernelMapper {
         return null;
     }
 
+    public Integer findLatest(boolean bit64) {
+        JsonNode data = context.get("DATA");
+        for (JsonNode map : data) {
+            String label = map.get("LABEL").asText();
+            if (bit64) {
+                if (label.contains("Latest")&& label.contains("64 bit")) {
+                    return map.get("KERNELID").asInt();
+                }
+            } else {
+                if (label.contains("Latest") && label.contains("32 bit")) {
+                    return map.get("KERNELID").asInt();
+                }
+            }
+        }
+        return null;
+    }
+
     public KernelMapper(JsonNode context) {
         this.context = context;
     }
